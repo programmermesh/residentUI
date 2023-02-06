@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private baseURL: string =environment.baseUrl;
+  private baseURL: string =environment.baseUrl+"/users";
 
   constructor(private http:HttpClient) { }
 
@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   getAllUsers(){
-    return this.http.get(`${this.baseURL}/users`);
+    return this.http.get(`${this.baseURL}`);
   }
 
 }
