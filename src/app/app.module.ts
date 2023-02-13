@@ -14,6 +14,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormValidation } from './auth/helpers/form-validation';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { ManageResidentsComponent } from './components/manage-residents/manage-residents.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { FormValidation } from './auth/helpers/form-validation';
     TopnavComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ManageUsersComponent,
+    ManageResidentsComponent
   ],
   imports: [
     BrowserModule,

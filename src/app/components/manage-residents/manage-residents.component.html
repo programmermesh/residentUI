@@ -1,0 +1,219 @@
+<div class="card">
+  <!-- Card header -->
+  <div class="card-header border-0">
+    <div class="row">
+      <div class="col-6">
+        <h3 class="mb-0">Manage Residents</h3>
+      </div>
+      <div class="col-6 text-right">
+        <a
+          href="#"
+          class="btn btn-sm btn-neutral btn-round btn-icon"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+          <span class="btn-inner--text">New Resident</span>
+        </a>
+        <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon">
+          <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+          <span class="btn-inner--text">Export</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Light table -->
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Name</th>
+          <th>Spouse</th>
+          <th>Children</th>
+          <th>House</th>
+          <th>House No</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of residentList; let i = index">
+          <td>
+            <span class="text-muted">{{ 1 + i }}</span>
+          </td>
+          <td class="table-user">
+            <b>{{ list.username }}</b>
+          </td>
+          <td>
+            <span class="text-muted">{{ list.fullName }}</span>
+          </td>
+          <td>
+            <span class="font-weight-bold">{{ list.spouseName }}</span>
+          </td>
+          <td>
+            <span>{{ list.numberOfChildren }}</span>
+          </td>
+          <td>
+            <span>{{ list.houseType }}</span>
+          </td>
+
+          <td>
+            <span>{{ list.houseNumber }}</span>
+          </td>
+          <td class="table-actions">
+            <a class="table-action">
+              <i class="fas fa-user-edit"></i>
+            </a>
+            <a
+              (click)="deleteUser(list.id)"
+              class="table-action table-action-delete"
+            >
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Resident</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="residentForm">
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">Name</label>
+              <input
+                class="form-control form-control"
+                type="text"
+                placeholder="Full Name"
+                formControlName="fullName"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Username</label>
+              <input
+                class="form-control form-control"
+                type="text"
+                placeholder="Username"
+                formControlName="username"
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Spouse Name</label>
+              <input
+                class="form-control form-control"
+                type="text"
+                placeholder="Spouse"
+                formControlName="spouseName"
+              />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Number of Children</label>
+              <input
+                class="form-control form-control"
+                type="number"
+                placeholder="Number of Children"
+                formControlName="numberOfChildren"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Children Names</label>
+              <input
+                class="form-control form-control"
+                type="text"
+                placeholder="e.g Martins, Victor, Benard"
+                formControlName="childrenName"
+                (keydown.enter)="addChild($event)"
+              />
+              <!-- lists -->
+              <p *ngIf="children.length > 0">
+                <i *ngFor="let c of children"> {{ c }}, </i>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">House Type</label>
+              <input
+                class="form-control form-control"
+                type="text"
+                placeholder="e.g Bungalow, Flat, Duplex"
+                formControlName="houseType"
+              />
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">House Number</label>
+              <input
+                class="form-control form-control"
+                type="text"
+                placeholder="e.g Martins, Victor, Benard"
+                formControlName="houseNumber"
+              />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Gender</label>
+              <select class="form-control" formControlName="gender">
+                <option value="Select Gender">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Password</label>
+              <input
+                class="form-control form-control"
+                type="password"
+                placeholder="********"
+                formControlName="password"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="registerResident()"
+        >
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

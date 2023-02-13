@@ -24,5 +24,8 @@ export class AuthService {
   getAllUsers(){
     return this.http.get(`${this.baseURL}`);
   }
+  deleteUser(id:any){
+    return this.http.delete(`${this.baseURL}/${id}`);
+  }
 
 }
