@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ResidentService } from 'src/app/services/resident.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class ManageResidentsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private residentService: ResidentService
+    private residentService: ResidentService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -58,6 +60,10 @@ export class ManageResidentsComponent implements OnInit {
       this.children.push(child);
       this.residentForm.controls['childrenName'].reset();
     }
+  }
+
+  viewVisitors(id: any) {
+    this.router.navigate(['/home/visitor/', id]);
   }
 
   deleteUser(id: any) {}

@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormValidation } from './auth/helpers/form-validation';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { ManageResidentsComponent } from './components/manage-residents/manage-residents.component';
+import { VisitorComponent } from './components/visitor/visitor.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ManageResidentsComponent } from './components/manage-residents/manage-r
     LoginComponent,
     RegisterComponent,
     ManageUsersComponent,
-    ManageResidentsComponent
+    ManageResidentsComponent,
+    VisitorComponent
   ],
   imports: [
     BrowserModule,

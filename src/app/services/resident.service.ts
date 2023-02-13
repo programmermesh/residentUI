@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class ResidentService {
 
+
   private baseURL: string =environment.baseUrl+"/resident";
+  private visitorURL: string =environment.baseUrl+"/visitor";
 
   constructor(private http:HttpClient) { }
 
@@ -17,6 +19,14 @@ export class ResidentService {
 
   registerResident(resident:any){
     return this.http.post(this.baseURL+"/register",resident);
+  }
+
+  getResidentById(residentId: string) {
+    return this.http.get(this.baseURL + '/' + residentId);
+  }
+
+  addVisitor(residentId: string, visitor: any) {
+    return this.http.post(this.visitorURL + '/' + residentId, visitor);
   }
 
   

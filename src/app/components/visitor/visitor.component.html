@@ -1,0 +1,122 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="mb-0">Manage Visitor - {{resident?.fullName}}</h3>
+        </div>
+        <div class="col-6 text-right">
+          <a
+            href="#"
+            class="btn btn-sm btn-neutral btn-round btn-icon"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+            <span class="btn-inner--text">New Visitor</span>
+          </a>
+          <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon">
+            <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+            <span class="btn-inner--text">Export</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Light table -->
+    <div class="table-responsive">
+      <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of visitors; let i = index">
+            <td>
+              <span class="text-muted">{{ 1 + i }}</span>
+            </td>
+            <td class="table-user">
+              <b>{{ list.name }}</b>
+            </td>
+        
+            <td>
+              <span>{{ list.discription }}</span>
+            </td>
+     
+            <td class="table-actions">
+              <a class="table-action">
+                <i class="fas fa-user-edit"></i>
+              </a>
+              <a
+                (click)="deleteVisitor(list.id)"
+                class="table-action table-action-delete"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Visitor</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="visitorForm">
+              <div class="form-group">
+                <label class="form-control-label">Name</label>
+                <input
+                  class="form-control form-control"
+                  type="text"
+                  placeholder="Enter Name"
+                  formControlName="name"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Description</label>
+                <textarea formControlName="discription" placeholder="Tell us something..." class="form-control" id="" cols="30" rows="3"></textarea>
+                
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addVisitor()"
+          >
+            Add Visitor
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
