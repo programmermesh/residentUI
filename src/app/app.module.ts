@@ -17,6 +17,7 @@ import { FormValidation } from './auth/helpers/form-validation';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { ManageResidentsComponent } from './components/manage-residents/manage-residents.component';
 import { VisitorComponent } from './components/visitor/visitor.component';
+import { LevyComponent } from './components/levy/levy.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { VisitorComponent } from './components/visitor/visitor.component';
     RegisterComponent,
     ManageUsersComponent,
     ManageResidentsComponent,
-    VisitorComponent
+    VisitorComponent,
+    LevyComponent
   ],
   imports: [
     BrowserModule,
