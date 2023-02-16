@@ -1,0 +1,106 @@
+<div class="card">
+  <!-- Card header -->
+  <div class="card-header border-0">
+    <form class="mb-3" [formGroup]="levyForm">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group mb-2">
+            <label class="form-control-label">Levy Type</label>
+            <input
+              class="form-control form-control"
+              type="text"
+              placeholder="Enter Levy Type"
+              formControlName="levyType"
+            />
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-2">
+            <label class="form-control-label">Apartment</label>
+            <select class="form-control" formControlName="apartmentType">
+              <option value="Select Apartment">Select Apartment</option>
+              <option class="1 Bedroom">1 Bedroom</option>
+              <option value="2 Bedroom">2 Bedroom</option>
+              <option value="3 Bedroom">3 Bedroom</option>
+              <option class="4 Bedroom">4 Bedroom</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-2">
+            <label class="form-control-label">Amount</label>
+            <input
+              class="form-control form-control"
+              type="number"
+              placeholder="₦0.00"
+              formControlName="amount"
+            />
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group mt-4">
+            <button (click)="addLevy()" class="btn btn-primary" style="margin-top: 7px;">Add Record</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-6">
+        <h3 class="mb-0">Manage Levies</h3>
+      </div>
+      <div class="col-6 text-right">
+        <a href="/home" class="btn btn-sm btn-neutral btn-round btn-icon">
+          <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+        </a>
+        <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon">
+          <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+          <span class="btn-inner--text">Export</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Light table -->
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Apartment</th>
+          <th>Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of levies; let i = index">
+          <td>
+            <span class="text-muted">{{ 1 + i }}</span>
+          </td>
+          <td class="table-user">
+            <b>{{ list.levyType }}</b>
+          </td>
+          <td>
+            <span>{{ list.apartmentType }}</span>
+          </td>
+          <td>
+            <span class="text-muted">{{ list.amount | currency:'₦' }}</span>
+          </td>
+
+          <td class="table-actions">
+            <a class="table-action">
+              <i class="fas fa-user-edit"></i>
+            </a>
+            <a
+              (click)="deleteLevy(list.id)"
+              class="table-action table-action-delete"
+            >
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

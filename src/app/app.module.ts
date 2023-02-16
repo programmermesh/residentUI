@@ -19,6 +19,7 @@ import { ManageResidentsComponent } from './components/manage-residents/manage-r
 import { VisitorComponent } from './components/visitor/visitor.component';
 import { ComponentsModule } from './components/components.module';
 import { Constants } from './services/BaseHttp/base-http.service';
+import { LevyComponent } from './components/levy/levy.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { Constants } from './services/BaseHttp/base-http.service';
     RegisterComponent,
     ManageUsersComponent,
     ManageResidentsComponent,
-    VisitorComponent
+    VisitorComponent,
+    LevyComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { Constants } from './services/BaseHttp/base-http.service';
   ],
   providers: [FormValidation,Constants],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports:[FooterComponent,HeaderComponent,SidebarComponent]
 })
 export class AppModule { }
