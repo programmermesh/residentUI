@@ -17,6 +17,8 @@ import { FormValidation } from './auth/helpers/form-validation';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { ManageResidentsComponent } from './components/manage-residents/manage-residents.component';
 import { VisitorComponent } from './components/visitor/visitor.component';
+import { ComponentsModule } from './components/components.module';
+import { Constants } from './services/BaseHttp/base-http.service';
 
 @NgModule({
   declarations: [
@@ -38,9 +40,10 @@ import { VisitorComponent } from './components/visitor/visitor.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsModule
   ],
-  providers: [FormValidation],
+  providers: [FormValidation,Constants],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

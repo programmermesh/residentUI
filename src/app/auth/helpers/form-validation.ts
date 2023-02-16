@@ -88,7 +88,15 @@ export class FormValidation {
 
 
  
-
+/**
+ * Add new notice
+ */
+CreateNewNoticeForm(){
+  return this.formBuilder.group({
+  title: new FormControl('', Validators.compose([Validators.minLength(1)])),
+  content: new FormControl('', Validators.compose([Validators.minLength(3)])),
+  })
+}
 
 
 

@@ -19,7 +19,8 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'users', component: ManageUsersComponent },
       { path: 'residents', component: ManageResidentsComponent },
-      {path: 'visitor/:id', component: VisitorComponent}
+      {path: 'visitor/:id', component: VisitorComponent},
+      { path: 'menu', loadChildren:()=>import('./components/components.module').then(m=>m.ComponentsModule) }
     ],
   },
 ];
