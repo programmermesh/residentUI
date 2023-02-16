@@ -50,7 +50,9 @@
             </td>
           
             <td class="table-actions">
-              <a  (click)="editNotice(n)" class="table-action">
+              <a  (click)="editNotice(n)" class="table-action"
+              data-toggle="modal"
+              data-target="#createNoticeModal">
                 <i class="fas fa-user-edit"></i>
               </a>
               <a (click)="confirmDelete(n)"
@@ -90,7 +92,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button *ngIf="!isUpdate"  type="submit" class="btn btn-primary" [disabled]="!createNewNotice.valid">Add Notice</button>
-          <button *ngIf="isUpdate"  type="button" class="btn btn-primary" (click)="UpdateNotice('id')" [disabled]="!createNewNotice.valid">Update Notice</button>
+          <button *ngIf="isUpdate"  type="button" class="btn btn-primary" (click)="UpdateNotice()" [disabled]="!createNewNotice.valid">Update Notice</button>
         </div>
     </form>
       </div>
