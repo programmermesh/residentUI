@@ -18,6 +18,24 @@ import { ManageUsersComponent } from './components/manage-users/manage-users.com
 import { ManageResidentsComponent } from './components/manage-residents/manage-residents.component';
 import { VisitorComponent } from './components/visitor/visitor.component';
 import { LevyComponent } from './components/levy/levy.component';
+import { Constants } from './services/BaseHttp/base-http.service';
+import { NoticeComponent } from './components/notice/notice.component';
+import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
+import { ExpenseIncomeComponent } from './components/expense-income/expense-income.component';
+import { NotificationModule } from './notification.module';
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: "red",
+  pbColor: "red",
+  fgsColor: "red",
+  bgsOpacity: 0.5,
+  bgsPosition: POSITION.centerCenter,
+  bgsSize: 40,
+  bgsType: SPINNER.rectangleBounce, // background spinner type
+  fgsType: SPINNER.ballScaleMultiple, // foreground spinner type
+  pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
+  pbThickness: 5, // progress bar thickness
+
+};
 
 @NgModule({
   declarations: [
@@ -33,16 +51,20 @@ import { LevyComponent } from './components/levy/levy.component';
     ManageUsersComponent,
     ManageResidentsComponent,
     VisitorComponent,
-    LevyComponent
+    LevyComponent,
+    NoticeComponent,
+    ExpenseIncomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotificationModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
-  providers: [FormValidation],
+  providers: [FormValidation,Constants],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

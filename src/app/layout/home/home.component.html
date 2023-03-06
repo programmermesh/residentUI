@@ -26,37 +26,85 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-dashboards">
+              <a routerLink="/home" class="nav-link active">
                 <i class="ni ni-shop text-primary"></i>
-                <span class="nav-link-text">Dashboards</span>
+                <span class="nav-link-text">Dashboard</span>
               </a>
-              <div class="collapse show" id="navbar-dashboards" style="">
+   
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#navbar-users" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                <i class="fa fa-users text-primary"></i>
+                <span class="nav-link-text">Users</span>
+              </a>
+              <div class="collapse" id="navbar-users">
                 <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="/home/levy" class="nav-link">Levy</a>
+                    <a routerLink="/home/residents" class="nav-link">Manage Residents</a>
                   </li>
                   <li class="nav-item">
-                    <a href="/home" class="nav-link">Payment</a>
+                    <a routerLink="/home/users" class="nav-link">Manage Users</a>
                   </li>
+                
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#navbar-visitor" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                <i class="fa fa-universal-access text-primary"></i>
+                <span class="nav-link-text">Visitor</span>
+              </a>
+              <div class="collapse" id="navbar-visitor">
+                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="/home" class="nav-link">Visitors</a>
+                    <a routerLink="/home/visitor" class="nav-link">Manage Visitors</a>
                   </li>
                 </ul>
               </div>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                <i class="ni ni-ungroup text-orange"></i>
-                <span class="nav-link-text">Users</span>
+              <a class="nav-link" href="#navbar-levy" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                <i class="fa fa-sitemap text-primary"></i>
+                <span class="nav-link-text">Levy</span>
               </a>
-              <div class="collapse" id="navbar-examples">
+              <div class="collapse" id="navbar-levy">
                 <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="/home/residents" class="nav-link">Manage Residents</a>
+                    <a routerLink="/home/levy" class="nav-link">Manage Levy</a>
                   </li>
+                </ul>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#navbar-expense" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                <i class="fa fa-sitemap text-primary"></i>
+                <span class="nav-link-text">Expense Income</span>
+              </a>
+              <div class="collapse" id="navbar-expense">
+                <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="/home/users" class="nav-link">Manage Users</a>
+                    <a routerLink="/home/expense" class="nav-link">Manage Expense</a>
                   </li>
+                </ul>
+              </div>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="#navbar-notice" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                <i class="fa fa-info text-primary"></i>
+                <span class="nav-link-text">Notice</span>
+              </a>
+              <div class="collapse" id="navbar-notice">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a routerLink="/home/notice" class="nav-link">All notices</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a href="/home/users" class="nav-link">Manage Users</a>
+                  </li> -->
                 
                 </ul>
               </div>
