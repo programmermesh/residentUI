@@ -40,7 +40,8 @@ export class FormValidation {
 
   registerForm() {
     return this.formBuilder.group({
-      fullName: new FormControl('', Validators.compose([Validators.minLength(1)])),
+      lastname: new FormControl('', Validators.compose([Validators.minLength(1)])),
+      other_names: new FormControl('', Validators.compose([Validators.minLength(1)])),
       username: new FormControl('', Validators.compose([Validators.minLength(1)])),
       gender: new FormControl('Select Gender', Validators.compose([Validators.required])),
       type: new FormControl('Select UserType', Validators.compose([Validators.required])),
@@ -88,7 +89,15 @@ export class FormValidation {
 
 
  
-
+/**
+ * Add new notice
+ */
+CreateNewNoticeForm(){
+  return this.formBuilder.group({
+  title: new FormControl('', Validators.compose([Validators.minLength(1)])),
+  content: new FormControl('', Validators.compose([Validators.minLength(3)])),
+  })
+}
 
 
 

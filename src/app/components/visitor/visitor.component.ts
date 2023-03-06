@@ -20,14 +20,15 @@ export class VisitorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.residentId = this.route.snapshot.params['id'];
-    this.getResidentById();
+    // this.residentId = this.route.snapshot.params['id'];
+    // this.getResidentById();
 
     this.visitorForm = this.fb.group({
       name: [''],
       discription: [''],
       residentId: [this.residentId],
     });
+    this.getVisitors();
   }
 
   getResidentById() {
@@ -41,13 +42,19 @@ export class VisitorComponent implements OnInit {
 
   addVisitor() {
     this.residentService
-      .addVisitor(this.residentId, this.visitorForm.value)
+      .addVisitor(this.visitorForm.value)
       .subscribe((res: any) => {
         this.visitorForm.reset();
       });
   }
 
-  getVisitors() {}
+  getVisitors() {
+    this.residentService
+      .getVisitors()
+      .subscribe((res: any) => {
+        this.visitors = res.visitor;
+      });
+  }
 
   deleteVisitor(id: any) {}
 }
