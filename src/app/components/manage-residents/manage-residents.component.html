@@ -114,9 +114,8 @@
               <select class="form-control" formControlName="employment_status">
                 <option value="Select Employment Status">Select Employment Status</option>
                 <option value="Employed">Employed</option>
-                <option value="Self Employed">Self Employed</option>
                 <option value="UnEmployed">UnEmployed</option>
-                <option value="Student">Student</option>
+                <option value="Retired">Retired</option>
 
               </select>
             </div>
@@ -133,13 +132,23 @@
           </div>
           <div class="form-row mb-2">
 
+            <div class="col-md-4">
+              <label class="form-control-label">Marital Status</label>
+              <select class="form-control" formControlName="status">
+                <option value="Select Status">Select Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widow">Widow</option>
+                <option value="Widower">Widower</option>
+              </select>
+            </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-control-label">Spouse Name</label>
               <input class="form-control form-control" type="text" placeholder="Spouse" formControlName="spouseName" />
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-control-label">Spouse Date of Birth</label>
               <input class="form-control form-control" type="date" placeholder="DOB" formControlName="spouse_dob" />
             </div>

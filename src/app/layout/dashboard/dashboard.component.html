@@ -1,3 +1,4 @@
+<app-expense-income-graph></app-expense-income-graph>
 
 <div class="row">
     <div class="col-xl-6">
@@ -7,95 +8,50 @@
             <div class="card-header">
                 <!-- Title -->
                 <h5 class="h3 mb-0">Residents</h5>
+
+                <div class="float-right">
+                    <form class="form-inline my-2 my-md-0">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="searchResidentFilter"
+                            name="searchVisitorfilter" placeholder="Search Resident" autocomplete>
+                    </form>
+                </div>
             </div>
             <!-- Card body -->
             <div class="card-body">
                 <!-- List group -->
                 <ul class="list-group list-group-flush list my--3">
-                    <li class="list-group-item px-0">
+                    <li class="list-group-item px-0"
+                        *ngFor="let list of residents.reverse() |filter:searchResidentFilter | paginate: {id: 'residents', itemsPerPage: 6, currentPage: p };">
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <!-- Avatar -->
-                                <a href="#" class="avatar rounded-circle">
+                                <a class="avatar rounded-circle">
                                     <img alt="Image placeholder" src="assets/img/team1.jpg">
                                 </a>
                             </div>
                             <div class="col ml--2">
                                 <h4 class="mb-0">
-                                    <a href="#!">John Michael</a>
+                                    <a>{{list.lastname}} {{list.other_names}}</a>
                                 </h4>
-                                <span class="text-success">●</span>
-                                <small>Online</small>
+                                <!-- <span class="text-success">●</span> -->
+                                <small>@{{list.username}}</small>
                             </div>
                             <div class="col-auto">
-                                <button type="button" class="btn btn-sm btn-primary">View Details</button>
+                                <button type="button" (click)="getResidentById(list.id)" class="btn btn-sm btn-primary"
+                                    data-toggle="modal" data-target="#exampleModal">View Details</button>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item px-0">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <!-- Avatar -->
-                                <a href="#" class="avatar rounded-circle">
-                                    <img alt="Image placeholder" src="assets/img/team1.jpg">
-                                </a>
-                            </div>
-                            <div class="col ml--2">
-                                <h4 class="mb-0">
-                                    <a href="#!">John Michael</a>
-                                </h4>
-                                <span class="text-success">●</span>
-                                <small>Online</small>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-0">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <!-- Avatar -->
-                                <a href="#" class="avatar rounded-circle">
-                                    <img alt="Image placeholder" src="assets/img/team1.jpg">
-                                </a>
-                            </div>
-                            <div class="col ml--2">
-                                <h4 class="mb-0">
-                                    <a href="#!">John Michael</a>
-                                </h4>
-                                <span class="text-success">●</span>
-                                <small>Online</small>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-0">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <!-- Avatar -->
-                                <a href="#" class="avatar rounded-circle">
-                                    <img alt="Image placeholder" src="assets/img/team1.jpg">
-                                </a>
-                            </div>
-                            <div class="col ml--2">
-                                <h4 class="mb-0">
-                                    <a href="#!">John Michael</a>
-                                </h4>
-                                <span class="text-success">●</span>
-                                <small>Online</small>
-                            </div>
-                            <div class="col-auto">
-                                <button type="button" class="btn btn-sm btn-primary">View Details</button>
-                            </div>
-                        </div>
-                    </li>
+                    <div class="container">
+                        <div class="float-right"> <pagination-controls id="residents" class="pagination"
+                                (pageChange)="p = $event"></pagination-controls></div>
+                    </div>
                 </ul>
             </div>
         </div>
     </div>
+
+
     <div class="col-xl-6">
         <!-- Checklist -->
         <div class="card">
@@ -103,71 +59,237 @@
             <div class="card-header">
                 <!-- Title -->
                 <h5 class="h3 mb-0">Today's Visitors</h5>
+
+                <div class="float-right">
+                    <form class="form-inline my-2 my-md-0">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="searchVisitorfilter"
+                            name="searchVisitorfilter" placeholder="Search Visitors" autocomplete>
+                    </form>
+                </div>
             </div>
             <!-- Card body -->
             <div class="card-body p-0">
                 <!-- List group -->
                 <ul class="list-group list-group-flush" data-toggle="checklist">
-                    <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
-                        <div class="checklist-item checklist-item-success">
+                    <li *ngFor="let list of visitors.reverse() |filter:searchVisitorfilter | paginate: {id: 'visitors', itemsPerPage: 6, currentPage: q };let i=index"
+                        class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
+                        <div [ngClass]="list.checkin? 'checklist-item-success':'checklist-item-danger'"
+                            class=" checklist-item ">
                             <div class="checklist-info">
-                                <h5 class="checklist-title mb-0">Call with Dave</h5>
-                                <small>10:30 AM</small>
+                                <h5 class="checklist-title mb-0">{{list.name | uppercase}} - <i>{{list.discription}}</i>
+                                </h5>
+                                <small *ngIf="list.checkin"><i class="fas fa-arrow-up text-success mr-2"></i>Last
+                                    CheckIn -
+                                    <i>{{list.checkinDate |
+                                        date:'medium'}}</i></small>
+                                <small *ngIf="list.checkout"><i class="fas fa-arrow-down text-warning mr-2"></i>
+                                    Last CheckOut - <i>{{list.checkoutDate |
+                                        date:'medium'}}</i></small>
                             </div>
-                            <div>
-                                <div class="custom-control custom-checkbox custom-checkbox-success">
-                                    <input class="custom-control-input" id="chk-todo-task-1" type="checkbox" checked>
-                                    <label class="custom-control-label" for="chk-todo-task-1"></label>
-                                </div>
-                            </div>
+
+                            <ng-container *ngIf="list.checkout || (list.checkout==false && list.checkin==false)">
+                                <button class="btn btn-icon btn-sm mr-2  btn-outline-success" type="button"
+                                    (click)="updateVisitor(true,list.id)">
+                                    <span class="btn-inner--text"> Check In <span *ngIf="loading"
+                                            class="spinner-border spinner-border-sm"></span>
+                                    </span>
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="list.checkin">
+                                <button class="btn btn-icon btn-sm btn-outline-primary" type="button"
+                                    (click)="updateVisitor(false,list.id)">
+                                    <span class="btn-inner--text">Check Out <span *ngIf="loading"
+                                            class="spinner-border spinner-border-sm"></span>
+                                    </span>
+                                </button>
+                            </ng-container>
+
                         </div>
+
                     </li>
-                    <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
-                        <div class="checklist-item checklist-item-warning">
-                            <div class="checklist-info">
-                                <h5 class="checklist-title mb-0">Lunch meeting</h5>
-                                <small>10:30 AM</small>
-                            </div>
-                            <div>
-                                <div class="custom-control custom-checkbox custom-checkbox-warning">
-                                    <input class="custom-control-input" id="chk-todo-task-2" type="checkbox">
-                                    <label class="custom-control-label" for="chk-todo-task-2"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
-                        <div class="checklist-item checklist-item-info">
-                            <div class="checklist-info">
-                                <h5 class="checklist-title mb-0">Argon Dashboard Launch</h5>
-                                <small>10:30 AM</small>
-                            </div>
-                            <div>
-                                <div class="custom-control custom-checkbox custom-checkbox-info">
-                                    <input class="custom-control-input" id="chk-todo-task-3" type="checkbox">
-                                    <label class="custom-control-label" for="chk-todo-task-3"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
-                        <div class="checklist-item checklist-item-danger">
-                            <div class="checklist-info">
-                                <h5 class="checklist-title mb-0">Winter Hackaton</h5>
-                                <small>10:30 AM</small>
-                            </div>
-                            <div>
-                                <div class="custom-control custom-checkbox custom-checkbox-danger">
-                                    <input class="custom-control-input" id="chk-todo-task-4" type="checkbox" checked>
-                                    <label class="custom-control-label" for="chk-todo-task-4"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <div class="container">
+                        <div class="float-right"> <pagination-controls id="visitors" class="pagination"
+                                (pageChange)="q = $event"></pagination-controls></div>
+                    </div>
                 </ul>
+
             </div>
         </div>
     </div>
+
+
+    <!-- View Resident Details -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resident Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Last Name</label>
+                                <input class="form-control form-control" [disabled]="true" type="text"
+                                    [value]="selectedResidentData.lastname" placeholder="Last Name" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Other Names</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.other_names" type="text" placeholder="Other Names" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-control-label">Username</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.username" type="text" placeholder="Username" />
+                            </div>
+                        </div>
+
+                        <div class="form-row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Employment Status</label>
+                                <select class="form-control" [disabled]="true">
+                                    <option [value]="selectedResidentData.status">
+                                        {{selectedResidentData.employment_status}}</option>
+
+
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Profession</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.profession" type="text" placeholder="Profession" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-control-label">Date Of Entry</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.date_of_entry" type="date" placeholder="Date" />
+                            </div>
+                        </div>
+                        <div class="form-row mb-2">
+
+                            <div class="col-md-4">
+                                <label class="form-control-label">Marital Status</label>
+                                <select class="form-control" [disabled]="true">
+                                    <option [value]="selectedResidentData.status">{{selectedResidentData.status}}
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-control-label">Spouse Name</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.spouseName" type="text" placeholder="Spouse" />
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-control-label">Spouse Date of Birth</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.spouse_dob" type="date" placeholder="DOB" />
+                            </div>
+                        </div>
+
+                        <div class="form-row mb-2">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Number of Children</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.numberOfChildren" type="number"
+                                    placeholder="Number of Children" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-label">Children Names</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.childrenName" type="text"
+                                    placeholder="e.g Martins, Victor, Benard" />
+                                <!-- lists -->
+                                <!-- <p *ngIf="children.length > 0">
+                <i *ngFor="let c of children"> {{ c }}, </i>
+              </p> -->
+                            </div>
+                        </div>
+
+                        <div class="form-row mb-2">
+                            <div class="col-md-6">
+                                <label class="form-control-label">House Type</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.houseType" type="text"
+                                    placeholder="e.g Bungalow, Flat, Duplex" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-label">House Number</label>
+                                <input class="form-control form-control" [disabled]="true"
+                                    [value]="selectedResidentData.houseNumber" type="text"
+                                    placeholder="e.g Martins, Victor, Benard" />
+                            </div>
+                        </div>
+
+                        <div class="form-row mb-2">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Gender</label>
+                                <select class="form-control" [disabled]="true">
+                                    <option [value]="selectedResidentData.gender">{{selectedResidentData.gender}}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- <div class="col-xl-4">
       
         <div class="card">

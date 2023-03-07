@@ -20,15 +20,12 @@ export class ExpenseIncomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.residentId = this.route.snapshot.params['id'];
-    // this.getResidentById();
-
     this.expenseForm = this.fb.group({
       name: [''],
       amount: [''],
       month: ['Select Month'],
       year: ['Select Year'],
-      type  : ['New'],
+      type: ['New'],
       description: [''],
     });
     this.getexpenses();
@@ -38,16 +35,14 @@ export class ExpenseIncomeComponent implements OnInit {
     this.expenseService
       .getExpenseIncome()
       .subscribe((res: any) => {
-        this.expense = res;
+        this.expense = res.expenseIncome;
         console.log(this.expense);
       });
   }
 
-  addVisitor() {
+  addExpense() {
     this.loading = true;
-    this.expenseService
-      .addExpenseIncome(this.expenseForm.value)
-      .subscribe((res: any) => {
+    this.expenseService.addExpenseIncome(this.expenseForm.value).subscribe((res: any) => {
         this.loading = false;
         this.expenseForm.reset();
       });

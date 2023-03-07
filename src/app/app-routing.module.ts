@@ -10,10 +10,12 @@ import { VisitorComponent } from './components/visitor/visitor.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { HomeComponent } from './layout/home/home.component';
 import { ExpenseIncomeComponent } from './components/expense-income/expense-income.component';
+import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  {path: 'admin/login', component: AdminLoginComponent},
   { path: 'register', component: RegisterComponent },
   {
     path: 'home',

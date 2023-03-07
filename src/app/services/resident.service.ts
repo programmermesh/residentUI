@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ResidentService {
+
   private baseURL: string = environment.baseUrl + '/resident';
   private visitorURL: string = environment.baseUrl + '/visitor';
 
@@ -31,5 +32,9 @@ export class ResidentService {
 
   getVisitors(): Observable<Visitor> {
     return this.http.get<Visitor>(this.visitorURL);
+  }
+
+  updateVisitor(visitorId: string, data: any) {
+    return this.http.put(this.visitorURL + '/' + visitorId, data);
   }
 }

@@ -27,7 +27,7 @@
                 <div class="card bg-secondary border-0 mb-0">
                     <div class="card-header bg-transparent pb-5">
                         <div class="text-muted text-center mt-2 mb-3">
-                            <h1>Login</h1>
+                            <h1>Admin Login</h1>
                         </div>
 
                     </div>
@@ -65,7 +65,7 @@
                                     <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
                                 <div class="text-center text-muted mb-4">
-                                    <a routerLink="/admin/login"><u>Sign in as admin</u></a>
+                                    <a routerLink="/login"><u>Sign in as Resident</u></a>
                                 </div>
                             </div>
                         </form>
@@ -76,7 +76,7 @@
                         <a href="#" class="text-light"><small>Forgot password?</small></a>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="/register" class="text-light"><small>Create new account</small></a>
+                        <a routerLink="/register" class="text-light"><small>Create new account</small></a>
                     </div>
                 </div>
             </div>

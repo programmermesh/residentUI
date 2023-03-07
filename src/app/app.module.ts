@@ -23,6 +23,11 @@ import { NoticeComponent } from './components/notice/notice.component';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
 import { ExpenseIncomeComponent } from './components/expense-income/expense-income.component';
 import { NotificationModule } from './notification.module';
+import { NgChartsModule } from 'ng2-charts';
+import { ExpenseIncomeGraphComponent } from './components/expense-income-graph/expense-income-graph.component';
+import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: "red",
   pbColor: "red",
@@ -53,7 +58,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     VisitorComponent,
     LevyComponent,
     NoticeComponent,
-    ExpenseIncomeComponent
+    ExpenseIncomeComponent,
+    ExpenseIncomeGraphComponent,
+    AdminLoginComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -62,9 +71,14 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FormsModule,
     ReactiveFormsModule,
     NotificationModule,
+    NgChartsModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxPaginationModule,
+    Ng2SearchPipeModule
+
+
   ],
-  providers: [FormValidation,Constants],
+  providers: [FormValidation, Constants],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
