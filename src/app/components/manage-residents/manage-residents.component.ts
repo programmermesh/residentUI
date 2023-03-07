@@ -30,7 +30,7 @@ export class ManageResidentsComponent implements OnInit {
       lastname: [''],
       other_names: [''],
       gender: ['Select Gender'],
-      status: [''],
+      status: ['Select Status'],
       phone_number1: [''],
       phone_number2: [''],
       dob: [''],
@@ -83,7 +83,7 @@ this.notifier.notify(NotificationType.WARNING,"You have reached the maximum numb
 
   viewVisitors(id: any) {
   //  navigate to query params route of ?residentId=1
-    this.router.navigate(['/visitors'], { queryParams: { residentId: id } });
+    this.router.navigate(['/home/visitor'], { queryParams: { residentId: id } });
   }
 
   deleteUser(id: any) {}

@@ -59,6 +59,8 @@
     </div>
 </div>
 
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -86,8 +88,8 @@
                     <div class="form-row  mb-1">
                         <div class="col-md-6">
                             <label class="form-control-label">Month</label>
-                            <select class="form-control">
-                                <option value="Select Month" formControlName="month">Select Month</option>
+                            <select class="form-control" formControlName="month">
+                                <option value="Select Month" >Select Month</option>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
                                 <option value="3">March</option>
@@ -119,7 +121,7 @@
 
                     <div class="form-group">
                         <label class="form-control-label">Description</label>
-                        <textarea formControlName="discription" placeholder="Tell us something..." class="form-control"
+                        <textarea formControlName="description" placeholder="Tell us something..." class="form-control"
                             id="" cols="30" rows="3"></textarea>
 
                     </div>
@@ -129,11 +131,13 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Close
                 </button>
-                <button type="button" class="btn btn-primary" (click)="addVisitor()">
-                    Add Visitor
+                <button type="button" class="btn btn-primary" (click)="addExpense()">
+                    Add Expense
                     <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 </button>
             </div>
         </div>
     </div>
 </div>
+
+<app-expense-income-graph></app-expense-income-graph>
