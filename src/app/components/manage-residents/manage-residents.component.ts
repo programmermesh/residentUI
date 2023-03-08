@@ -42,7 +42,7 @@ export class ManageResidentsComponent implements OnInit {
       numberOfChildren: [''],
       childrenName: [''],
       houseNumber: [''],
-      houseType: [''],
+      houseType: ['Select House Type'],
       username: [''],
       password: [''],
     });

@@ -7,14 +7,21 @@
             <!-- Card header -->
             <div class="card-header">
                 <!-- Title -->
-                <h5 class="h3 mb-0">Residents</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="mb-0">Recent Residents</h3>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="float-right">
+                            <form class="form-inline my-2 my-md-0">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="searchResidentFilter"
+                                name="searchVisitorfilter" placeholder="Search Resident" autocomplete>
+                            </form>
+                        </div>
+                    </div>
 
-                <div class="float-right">
-                    <form class="form-inline my-2 my-md-0">
-                        <input class="form-control form-control-sm" type="text" [(ngModel)]="searchResidentFilter"
-                            name="searchVisitorfilter" placeholder="Search Resident" autocomplete>
-                    </form>
                 </div>
+              
             </div>
             <!-- Card body -->
             <div class="card-body">
@@ -56,16 +63,25 @@
         <!-- Checklist -->
         <div class="card">
             <!-- Card header -->
-            <div class="card-header">
+            <div class="card-header  border-0">
                 <!-- Title -->
-                <h5 class="h3 mb-0">Today's Visitors</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="mb-0">Today's Visitors</h3>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="float-right">
+                            <form class="form-inline my-2 my-md-0">
+                                <input class="form-control form-control-sm" type="text"
+                                    [(ngModel)]="searchVisitorfilter" name="searchVisitorfilter"
+                                    placeholder="Search Visitors" autocomplete>
+                            </form>
+                        </div>
+                    </div>
 
-                <div class="float-right">
-                    <form class="form-inline my-2 my-md-0">
-                        <input class="form-control form-control-sm" type="text" [(ngModel)]="searchVisitorfilter"
-                            name="searchVisitorfilter" placeholder="Search Visitors" autocomplete>
-                    </form>
                 </div>
+
+
             </div>
             <!-- Card body -->
             <div class="card-body p-0">

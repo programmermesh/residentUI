@@ -174,8 +174,13 @@
           <div class="form-row mb-2">
             <div class="col-md-6">
               <label class="form-control-label">House Type</label>
-              <input class="form-control form-control" type="text" placeholder="e.g Bungalow, Flat, Duplex"
-                formControlName="houseType" />
+              <select class="form-control" formControlName="houseType">
+                <option value="Select House Type">Select House Type</option>
+                <option value="Flat">Flat</option>
+                <option value="Single House">Single House</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Mini Flat">Mini Flat</option>
+              </select>
             </div>
             <div class="col-md-6">
               <label class="form-control-label">House Number</label>
