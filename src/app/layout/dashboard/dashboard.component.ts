@@ -4,6 +4,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Resident } from 'src/app/Utils/Models/resident';
 import { Visitor } from 'src/app/Utils/Models/visitor';
 import { NotificationType } from 'src/app/Utils/notification.enum';
+import { NoticeService } from 'src/app/services/Notice/notice.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ResidentService } from 'src/app/services/resident.service';
 
@@ -17,47 +18,54 @@ export class DashboardComponent implements OnInit {
   visitors: any = [];
   p: number = 1;
   q: number = 1;
+  n: number = 1;
   searchVisitorfilter: string = '';
-  residents: any= [];
-  selectedResidentData:Resident = {};
+  residents: any = [];
+  selectedResidentData: Resident = {};
   searchResidentFilter: string = '';
+  loadingRecord: boolean = false;
+  residentDetailsLoading: boolean = false;
+  getAllNotices: any = [];
   constructor(private residentService: ResidentService,
     private loaderService: NgxUiLoaderService,
+    private noticeService: NoticeService,
     private notifier: NotificationService) { }
 
   ngOnInit(): void {
     this.getVisitors()
     this.getResidents()
+    this.getAllNoticesMethod()
   }
 
   getResidents() {
-    this.loaderService.start()
+    this.loadingRecord = true;
     this.residentService.getResidents().subscribe((res: any) => {
       this.residents = res.resident;
-      console.log(this.residents);
-      this.loaderService.stop()
+      this.loadingRecord = false;
     });
   }
 
   getResidentById(residentId: string) {
-    this.loaderService.start();
+  this.residentDetailsLoading = true;
     this.residentService.getResidentById(residentId).subscribe((res: any) => {
       this.selectedResidentData = res.resident;
-      console.log(this.selectedResidentData);
+    // this.residentDetailsLoading = false;
       this.loaderService.stop();
     });
   }
 
 
   getVisitors() {
-    this.loaderService.start();
+  this.loadingRecord = true;
     this.residentService
       .getVisitors()
       .subscribe((res: any) => {
-        this.visitors = res.visitor;
-        this.loaderService.stop();
+        // this.visitors = res.visitor;
+
+        this.visitors = res.visitor.filter((x: any) => (x.checkin == true) || (x.checkin == false && x.checkout == false))
+       this.loadingRecord = false;
       }, error => {
-        this.loaderService.stop();
+       this.loadingRecord = false;
       });
   }
 
@@ -72,8 +80,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  /**
+ * get all notices
+ */
+  getAllNoticesMethod() {
+    this.noticeService.GetAllNotices().subscribe({
+      next: (res: any) => {
+        this.getAllNotices = res.notice;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => { },
+    });
+  }
+
   visitorCheckIn(visitorId: string) {
-    this.loading = true;
     var data = {
       checkin: true,
       checkinDate: new Date(),
@@ -81,7 +103,6 @@ export class DashboardComponent implements OnInit {
       checkoutDate: null
     }
     this.residentService.updateVisitor(visitorId, data).subscribe((res: any) => {
-      this.loading = false;
       this.notifier.notify(NotificationType.SUCCESS, "CheckedIn Successfully");
       this.getVisitors();
     }, (error: any) => {
@@ -90,7 +111,6 @@ export class DashboardComponent implements OnInit {
   }
 
   visitorCheckOut(visitorId: string) {
-    this.loading = true;
     var data = {
       checkout: true,
       checkoutDate: new Date(),
@@ -98,7 +118,6 @@ export class DashboardComponent implements OnInit {
       checkinDate: null
     }
     this.residentService.updateVisitor(visitorId, data).subscribe((res: any) => {
-      this.loading = false;
       this.notifier.notify(NotificationType.SUCCESS, "CheckedOut Successfully");
       this.getVisitors();
     }, (error: any) => {

@@ -18,6 +18,7 @@ export class VisitorComponent implements OnInit {
   resident: any;
   newVisitorButton: boolean=false;
   loading: boolean = false;
+  recordLoading: boolean=false;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,

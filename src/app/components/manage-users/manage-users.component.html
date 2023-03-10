@@ -1,40 +1,42 @@
 <div class="card">
-    <!-- Card header -->
-    <div class="card-header border-0">
-      <div class="row">
-        <div class="col-6">
-          <h3 class="mb-0">Manage Users</h3>
-        </div>
-        <div class="col-6 text-right">
-          <a href="/home" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal" data-target="#exampleModal">
-            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
-            <span class="btn-inner--text">New User</span>
-          </a>
-          <a href="/home" class="btn btn-sm btn-neutral btn-round btn-icon" >
-            <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
-            <span class="btn-inner--text">Export</span>
-          </a>
-        </div>
+  <!-- Card header -->
+  <div class="card-header border-0">
+    <div class="row">
+      <div class="col-6">
+        <h3 class="mb-0">Manage Admin Users</h3>
+      </div>
+      <div class="col-6 text-right">
+        <a href="/home" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal"
+          data-target="#exampleModal">
+          <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+          <span class="btn-inner--text">New Admin User</span>
+        </a>
+        <a href="/home" class="btn btn-sm btn-neutral btn-round btn-icon">
+          <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+          <span class="btn-inner--text">Export</span>
+        </a>
       </div>
     </div>
-    <!-- Light table -->
-    <div class="table-responsive">
-      <table class="table align-items-center table-flush">
-        <thead class="thead-light">
-          <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>User Type</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+  </div>
+  <!-- Light table -->
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>User Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf=" userList?.length>0; else noRecordTemplate">
           <tr *ngFor="let u of userList;let i=index">
             <td>
-                <span class="text-muted">{{1+i}}</span>
-              </td>
+              <span class="text-muted">{{1+i}}</span>
+            </td>
             <td class="table-user">
               <b>{{u.username}}</b>
             </td>
@@ -42,13 +44,13 @@
               <span class="text-muted">{{u.lastname}} {{u.other_names}}</span>
             </td>
             <td>
-              <span  class="font-weight-bold">{{u.gender}}</span>
+              <span class="font-weight-bold">{{u.gender}}</span>
             </td>
             <td>
-                <span  class="font-weight-bold">{{u.type}}</span>
-              </td>
+              <span class="font-weight-bold">{{u.type}}</span>
+            </td>
             <td class="table-actions">
-              <a  class="table-action">
+              <a class="table-action">
                 <i class="fas fa-user-edit"></i>
               </a>
               <a (click)="deleteUser(u.id)" class="table-action table-action-delete">
@@ -56,35 +58,60 @@
               </a>
             </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+        </ng-container>
+        <ng-template #noRecordTemplate>
+          <tr>
+            <td colspan="6" class="text-center">
+              <div class="container p-5 mb-2">
+                <div class="text-center">
+                  <div *ngIf="recordLoading" class="spinner-border text-danger spinner-border-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+
+                  <span>
+                    <h5 *ngIf="recordLoading" class=" text-muted">Fetching Records</h5>
+                    <h5 *ngIf="!recordLoading" class=" text-muted">No Record Found!</h5>
+                  </span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
   </div>
+</div>
 
 
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Register User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel">Register Admin User</h5>
+        <button type="button" id="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="userForm">
           <div class="form-group mb-2">
-            <label class="form-control-label">Name</label>
-            <input class="form-control form-control" type="text" placeholder="Full Name">
+            <label class="form-control-label">Last Name</label>
+            <input class="form-control form-control" formControlName="lastname" type="text" placeholder="Last Name">
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-control-label">Other Names</label>
+            <input class="form-control form-control" formControlName="other_names" type="text"
+              placeholder="Other Names">
           </div>
           <div class="form-group mb-2">
             <label class="form-control-label">Username</label>
-            <input class="form-control form-control" type="text" placeholder="Username">
+            <input class="form-control form-control" formControlName="username" type="text" placeholder="Username">
           </div>
           <div class="form-group mb-2">
             <label class="form-control-label">Gender</label>
-            <select class="form-control">
+            <select class="form-control" formControlName="gender">
               <option value="Select Gender">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -94,22 +121,25 @@
 
           <div class="form-group mb-2">
             <label class="form-control-label">User Type</label>
-            <select class="form-control">
-              <option value="Select Role">Select Role</option>
+            <select class="form-control" formControlName="type">
+              <option value="Select User Type">Select User Type</option>
               <option value="Security">Security</option>
               <option value="Admin">Admin</option>
-              <option value="SuperAdmin">SuperAdmin</option>
+              <option value="FinancialApproval">Financial Approval</option>
             </select>
           </div>
           <div class="form-group mb-2">
             <label class="form-control-label">Password</label>
-            <input class="form-control form-control" type="password" placeholder="********">
+            <input class="form-control form-control" formControlName="password" type="password" placeholder="********">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Register</button>
+        <button type="button" class="btn btn-primary" (click)="createNewUser()">Register
+          <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+        </button>
       </div>
     </div>
   </div>

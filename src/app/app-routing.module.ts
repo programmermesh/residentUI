@@ -11,11 +11,15 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { HomeComponent } from './layout/home/home.component';
 import { ExpenseIncomeComponent } from './components/expense-income/expense-income.component';
 import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
+import { PendingPaymentComponent } from './components/payment/pending-payment/pending-payment.component';
+import { ApprovePaymentComponent } from './components/payment/approve-payment/approve-payment.component';
+import { TransactionHistoryComponent } from './components/payment/transaction-history/transaction-history.component';
+import { FinancialStatementComponent } from './components/payment/financial-statement/financial-statement.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  {path: 'admin/login', component: AdminLoginComponent},
+  { path: 'admin/login', component: AdminLoginComponent },
   { path: 'register', component: RegisterComponent },
   {
     path: 'home',
@@ -27,7 +31,11 @@ const routes: Routes = [
       { path: 'visitor', component: VisitorComponent },
       { path: "levy", component: LevyComponent },
       { path: "notice", component: NoticeComponent },
-      {path: "expense", component: ExpenseIncomeComponent}
+      { path: "expense", component: ExpenseIncomeComponent },
+      { path: "payment/approve", component: ApprovePaymentComponent },
+      { path: "payment/pending", component: PendingPaymentComponent },
+      { path: "transaction/history", component: TransactionHistoryComponent },
+      { path: "financial/statement", component: FinancialStatementComponent },
     ],
   },
 ];

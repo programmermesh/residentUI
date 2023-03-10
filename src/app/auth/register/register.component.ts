@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigateByUrl('login');
         }
         else {
-          this.notifier.notify(NotificationType.ERROR, res.ResponseMessage)
+          this.notifier.notify(NotificationType.ERROR, res.ResponseDescription)
         }
       }, error => {
         this.loading = false;

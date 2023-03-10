@@ -11,11 +11,7 @@
                     <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
                     <span class="btn-inner--text">New Record</span>
                 </a>
-                <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon">
-                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
-                    <span class="btn-inner--text">Export</span>
-                </a>
-                <div class="float-right">
+                           <div class="float-right">
                     <form class="form-inline my-2 my-md-0">
                         <select  class="form-control form-control-sm" (change)="filterExpenseIncome($event)">
                             <option value="Select Type">Filter Type</option>
@@ -30,6 +26,32 @@
     </div>
     <!-- Light table -->
     <div class="table-responsive">
+        
+        <div *ngIf="type=='Expense'" class="m-2 ">
+            <span class="h4  ml-3 text-uppercase text-muted mb-0 text-danger">Manage - {{type}} </span>
+            <div style="display: -webkit-inline-box;float: right;">
+                <span class="badge badge-success mr-3">Total Expense Amount: {{ totalExpense |
+                    currency:'₦'}}</span>
+                <a class=" btn mr-3 mb-1 btn-sm btn-neutral btn-round btn-icon"
+                   >
+                    <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+                    <span class="btn-inner--text">Export</span>
+                </a>
+            </div>
+        </div>
+
+        <div *ngIf="type=='Income'" class="m-2 ">
+            <span class="h4  ml-3 text-uppercase text-muted mb-0 text-danger">Manage - {{type}} </span>
+            <div style="display: -webkit-inline-box;float: right;">
+                <span class="badge badge-success mr-3">Total Income Amount: {{ totalIncome |
+                    currency:'₦'}}</span>
+                <a class=" btn mr-3 mb-1 btn-sm btn-neutral btn-round btn-icon"
+                   >
+                    <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+                    <span class="btn-inner--text">Export</span>
+                </a>
+            </div>
+        </div>
         <table class="table align-items-center table-flush">
             <thead class="thead-light">
                 <tr>
@@ -89,7 +111,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Expense - Income</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" id="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -173,4 +195,4 @@
     </div>
 </div>
 
-<app-expense-income-graph></app-expense-income-graph>
+<!-- <app-expense-income-graph></app-expense-income-graph> -->

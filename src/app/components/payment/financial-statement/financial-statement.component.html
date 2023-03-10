@@ -1,0 +1,373 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="mb-3">Financial Statement</h3>
+                <ul class="nav nav-pills nav-pills-sm mb-3 shadow-sm" id="pills-tab" role="tablist">
+                    <li class="nav-item w-50">
+                        <a class="nav-link active " id="pills-month-tab" data-toggle="pill" href="#pills-month"
+                            role="tab" aria-controls="pills-month" aria-selected="true"> <span
+                                class="btn-inner--icon"><i class="ni ni-calendar-grid-58"></i></span> Monthy</a>
+                    </li>
+                    <li class="nav-item w-50">
+                        <a class="nav-link" id="pills-year-tab" data-toggle="pill" href="#pills-year" role="tab"
+                            aria-controls="pills-year" aria-selected="false"><span class="btn-inner--icon"><i
+                                    class="ni ni-calendar-grid-58"></i></span> Yearly</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Monthly</h5>
+                                    <span class="h4 font-weight-bold mb-0">{{monthlyTotalAmount | currency:'₦'}}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                        <i class="ni ni-chart-bar-32"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ng-container *ngIf="showMonthandYear">
+                                        <p class="text-sm">
+                                            <small class="mt-3 mb-1">{{monthlyPeriod.month.substr(0, 3)}} -
+                                                {{monthlyPeriod.year}}
+                                            </small>
+                                        </p>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <p class="mb-0 text-sm">
+                                        <marquee behavior="alternate" [scrollDelay]="700" direction="right">
+                                            <small class="text-nowrap text-muted"><i> Select period to update
+                                                </i></small>
+                                        </marquee>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card bg-gradient-danger card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0 text-white">Yearly</h5>
+                                    <span class="h4 font-weight-bold mb-0 text-white">{{yearlyTotalAmount |
+                                        currency:'₦'}}</span>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                        <i class="ni ni-chart-bar-32"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ng-container *ngIf="showYear">
+                                        <small class="mt-3 mb-1">{{yearPeriod.year}} </small>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <p class="mb-0 text-sm">
+                                        <marquee behavior="" [scrollDelay]="700" direction="right">
+                                            <small class="text-nowrap"><i> Select period to update </i></small>
+                                        </marquee>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="tab-content" id="pills-tabContent p-3">
+        <!-- month  -->
+        <div class="tab-pane fade show active" id="pills-month" role="tabpanel" aria-labelledby="pills-month-tab">
+
+            <form [formGroup]="monthFormFilter">
+                <div class="row m-2">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group mb-2">
+                                    <select class="form-control form-control-sm" formControlName="month" required>
+                                        <option [selected]="true">Select Month</option>
+                                        <option value="January">January</option>
+                                        <option value="February">February</option>
+                                        <option value="March">March</option>
+                                        <option value="April">April</option>
+                                        <option value="May">May</option>
+                                        <option value="June">June</option>
+                                        <option value="July">July</option>
+                                        <option value="August">August</option>
+                                        <option value="September">September</option>
+                                        <option value="October">October</option>
+                                        <option value="November">November</option>
+                                        <option value="December">December</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-2">
+                                    <select class="form-control form-control-sm" formControlName="year" required>
+                                        <option [selected]="true">Select Year</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-2">
+                                    <select class="form-control form-control-sm" formControlName="levy" required>
+                                        <option [selected]="true">Select Levy</option>
+                                        <option *ngFor="let levy of levies" [value]="levy?.levyType">{{levy.levyType}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary btn-sm w-100" (click)="filterPaymentByMonth()"><i
+                                        class="fa fa-filter mr-2"></i>Filter <span *ngIf="loading"
+                                        class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Light table -->
+            <div class="table-responsive">
+                <ng-container *ngIf=" montlyPaymentList?.length>0; else noRecordTemplate">
+                    <div class="m-2 ">
+                        <span class="h4  ml-3 text-uppercase text-muted mb-0 text-danger">{{monthlyPeriod.month}}
+                            {{monthlyPeriod.year}} - Monthly Payment</span>
+                        <div style="display: -webkit-inline-box;float: right;">
+                            <span class="badge badge-success mr-3">Total Amount: {{monthlyTotalAmount |
+                                currency:'₦'}}</span>
+                            <a class=" btn mr-3 mb-1 btn-sm btn-neutral btn-round btn-icon"
+                                (click)="exportMonthlyExcel(monthlyPeriod.month,monthlyPeriod.year)">
+                                <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+                                <span class="btn-inner--text">Export</span>
+                            </a>
+                        </div>
+                    </div>
+                    <table id="month-table" class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <div [hidden]="true">
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <h4 class="text-uppercase text-muted mb-0 text-danger">{{monthlyPeriod.month}}
+                                            {{monthlyPeriod.year}} - Monthly Payment</h4>
+                                    </td>
+                                </tr>
+                            </div>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Levy</th>
+                                <th>Amount</th>
+                                <th>Month/Year</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of montlyPaymentList; let i = index">
+                                <td>
+                                    <span class="text-muted">{{ 1 + i }}</span>
+                                </td>
+                                <td class="table-user">
+                                    <b>{{ list.fullName }}</b>
+                                </td>
+                                <td>
+                                    <span>{{ list.levy }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ list.amount | currency:'₦' }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.month }} - {{ list.year }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.status }}</span>
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                        <!-- Add footer with only amount column on the last -->
+                        <tfoot [hidden]="true">
+                            <tr>
+                                <td colspan="4" class="text-right"></td>
+                                <td><Strong>Total Amount</Strong></td>
+                                <td>{{monthlyTotalAmount | currency:'₦'}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </ng-container>
+
+                <ng-template #noRecordTemplate>
+                    <hr>
+                    <div class="container p-5 mb-2">
+                        <span>
+                            <div class=" text-center"> <img src="assets/img/no-record.png" height="100" alt=""></div>
+                        </span>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <!-- approve -->
+        <div class="tab-pane fade" id="pills-year" role="tabpanel" aria-labelledby="pills-year-tab">
+
+            <form [formGroup]="yearFormFilter">
+                <div class="row m-2">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group mb-2">
+                                    <select class="form-control form-control-sm" formControlName="year" required>
+                                        <option [selected]="true">Select Year</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group mb-2">
+                                    <select class="form-control form-control-sm" formControlName="levy" required>
+                                        <option [selected]="true">Select Levy</option>
+                                        <option *ngFor="let levy of levies" [value]="levy?.levyType">{{levy.levyType}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary btn-sm w-100" (click)="filterPaymentByYear()"><i
+                                        class="fa fa-filter mr-2"></i>Filter <span *ngIf="loading"
+                                        class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- Light table -->
+            <div class="table-responsive ">
+                <ng-container *ngIf=" yearlyPaymentList?.length>0; else noRecordTemplate">
+                    <div class="m-2 ">
+                        <span class="h4  ml-3 text-uppercase text-muted mb-0 text-danger">{{yearPeriod.year}} - Yearly
+                            Payment</span>
+                        <div style="display: -webkit-inline-box;float: right;">
+                            <span class="badge badge-success mr-3">Total Amount: {{yearlyTotalAmount |
+                                currency:'₦'}}</span>
+                            <a class=" btn mr-3 mb-1 btn-sm btn-neutral btn-round btn-icon"
+                                (click)="exportYearExcel(yearPeriod.year)">
+                                <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+                                <span class="btn-inner--text">Export</span>
+                            </a>
+                        </div>
+                    </div>
+                    <table id="year-table" class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <div [hidden]="true">
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <h4 class="text-uppercase text-muted mb-0 text-danger"> {{yearPeriod.year}} -
+                                            Yearly Payment</h4>
+                                    </td>
+                                </tr>
+                            </div>
+
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Levy</th>
+                                <th>Amount</th>
+                                <th>Month/Year</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of yearlyPaymentList; let i = index">
+                                <td>
+                                    <span class="text-muted">{{ 1 + i }}</span>
+                                </td>
+                                <td class="table-user">
+                                    <b>{{ list.fullName }}</b>
+                                </td>
+                                <td>
+                                    <span>{{ list.levy }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ list.amount | currency:'₦' }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.month }} - {{ list.year }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.status }}</span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        <!-- Add footer with only amount column on the last -->
+                        <tfoot [hidden]="true">
+                            <tr>
+                                <td colspan="4" class="text-right"></td>
+                                <td><Strong>Total Amount</Strong></td>
+                                <td>{{yearlyTotalAmount | currency:'₦'}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </ng-container>
+
+                <ng-template #noRecordTemplate>
+                    <hr>
+                    <div class="container mb-2">
+                        <span>
+                            <div class=" text-center"> <img src="assets/img/no-record.png" height="100" alt=""></div>
+                        </span>
+                    </div>
+
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+
+</div>

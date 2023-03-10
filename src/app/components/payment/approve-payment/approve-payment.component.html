@@ -1,0 +1,197 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-3">Manage Payment</h3>
+                <ul class="nav nav-pills nav-pills-sm mb-3 shadow-sm" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-pending-tab" data-toggle="pill" href="#pills-pending"
+                            role="tab" aria-controls="pills-pending" aria-selected="true"> <span
+                                class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span> Pending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-approved-tab" data-toggle="pill" href="#pills-approved" role="tab"
+                            aria-controls="pills-approved" aria-selected="false"><span class="btn-inner--icon"><i
+                                    class="ni ni-check-bold"></i></span> Approved</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 text-right">
+                <a href="/home" class="btn btn-sm btn-neutral btn-round btn-icon">
+                    <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+                    <span class="btn-inner--text">Export</span>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="tab-content" id="pills-tabContent p-3">
+        <!-- pending  -->
+        <div class="tab-pane fade show active" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
+            <!-- Light table -->
+            <div class="table-responsive">
+                <ng-container *ngIf=" pendingPaymentList?.length>0; else noRecordTemplate">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Levy</th>
+                                <th>Amount</th>
+                                <th>Month/Year</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of pendingPaymentList; let i = index">
+                                <td>
+                                    <span class="text-muted">{{ 1 + i }}</span>
+                                </td>
+                                <td class="table-user">
+                                    <b>{{ list.fullName }}</b>
+                                </td>
+                                <td>
+                                    <span>{{ list.levy }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ list.amount | currency:'₦' }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.month }} - {{ list.year }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.status }}</span>
+                                </td>
+
+                                <td class="table-actions">
+                                    <a class="table-action" data-toggle="modal" data-target="#exampleModal"
+                                        (click)="viewPayment(list)">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a class="table-action table-action-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+
+                <ng-template #noRecordTemplate>
+                    <hr>
+                    <div class="container mb-2"> 
+                        <span ><h5 class=" text-muted text-center">No Record Found!</h5></span>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <!-- approve -->
+        <div class="tab-pane fade" id="pills-approved" role="tabpanel" aria-labelledby="pills-approved-tab">
+            <!-- Light table -->
+            <div class="table-responsive">
+                <ng-container *ngIf=" paymentList?.length>0; else noRecordTemplate">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Levy</th>
+                                <th>Amount</th>
+                                <th>Month/Year</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of paymentList; let i = index">
+                                <td>
+                                    <span class="text-muted">{{ 1 + i }}</span>
+                                </td>
+                                <td class="table-user">
+                                    <b>{{ list.fullName }}</b>
+                                </td>
+                                <td>
+                                    <span>{{ list.levy }}</span>
+                                </td>
+                                <td>
+                                    <span>{{ list.amount | currency:'₦' }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.month }} - {{ list.year }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ list.status }}</span>
+                                </td>
+
+                                <td class="table-actions">
+                                    <a class="table-action table-action-delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+
+                <ng-template #noRecordTemplate>
+                    <hr>
+                    <div class="container mb-2"> 
+                        <span ><h5 class=" text-muted text-center">No Record Found!</h5></span>
+                    </div>
+                    
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Preview Payment</h5>
+                <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!-- display image -->
+                    <div class="img text-center">
+                        <img class="mt-2" [src]="paymentDetail?.file" style="max-width:200px;max-height:200px" />
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" (click)="approvePayment()">
+                    Approve Payment
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

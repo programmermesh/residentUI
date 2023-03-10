@@ -13,8 +13,8 @@
           </a>
         </ng-container>
         <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon">
-          <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
-          <span class="btn-inner--text">Export</span>
+            <span class="btn-inner--icon"><i class="fa fa-file-excel"></i></span>
+            <span class="btn-inner--text">Export</span>
         </a>
       </div>
     </div>
@@ -35,6 +35,7 @@
         </tr>
       </thead>
       <tbody>
+        <ng-container *ngIf=" visitors?.length>0; else noRecordTemplate">
         <tr *ngFor="let list of visitors.reverse(); let i = index">
           <td>
             <span class="text-muted">{{ 1 + i }}</span>
@@ -74,6 +75,25 @@
 
           </td>
         </tr>
+        </ng-container>
+        <ng-template #noRecordTemplate>
+          <tr>
+            <td colspan="8" class="text-center">
+              <div class="container p-5 mb-2">
+                <div class="text-center">
+                  <div *ngIf="recordLoading" class="spinner-border text-danger spinner-border-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+
+                  <span>
+                    <h5 *ngIf="recordLoading" class=" text-muted">Fetching Records</h5>
+                    <h5 *ngIf="!recordLoading" class=" text-muted">No Record Found!</h5>
+                  </span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
       </tbody>
     </table>
   </div>
@@ -86,7 +106,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Visitor</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

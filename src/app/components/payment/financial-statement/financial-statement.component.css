@@ -1,0 +1,9 @@
+.card-body{
+    background: aliceblue;
+    border-radius: 10px;
+}
+
+a{
+    cursor: pointer;
+}
+

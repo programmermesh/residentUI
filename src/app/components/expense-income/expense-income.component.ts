@@ -16,6 +16,9 @@ export class ExpenseIncomeComponent implements OnInit {
   expenseForm!: FormGroup;
   incomeExpenseList: any = [];
   loading = false;
+  type: any = "Expense"	;
+  totalIncome: number =0 ;
+  totalExpense: number = 0;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -42,6 +45,7 @@ export class ExpenseIncomeComponent implements OnInit {
       .getExpense()
       .subscribe((res: any) => {
         this.incomeExpenseList = res.expenseIncome;
+        this.totalExpense = res.totalExpense;
         this.loaderService.stop();
       }, error => {
         this.notifier.notify(NotificationType.ERROR, error.error.message)
@@ -55,6 +59,7 @@ export class ExpenseIncomeComponent implements OnInit {
       .getIncome()
       .subscribe((res: any) => {
         this.incomeExpenseList = res.expenseIncome;
+        this.totalIncome = res.totalIncome;
         this.loaderService.stop();
       }, error => {
         this.notifier.notify(NotificationType.ERROR, error.error.message)
@@ -80,11 +85,11 @@ export class ExpenseIncomeComponent implements OnInit {
   }
 
   filterExpenseIncome(event: any) {
-    var value = event.target.value;
-    if (value == "Expense") {
+    this.type = event.target.value;
+    if ( this.type == "Expense") {
       this.getexpenses();
     }
-    if (value == "Income") {
+    if ( this.type == "Income") {
       this.getIncome();
     }
 

@@ -28,11 +28,16 @@ import { ExpenseIncomeGraphComponent } from './components/expense-income-graph/e
 import { AdminLoginComponent } from './auth/admin-login/admin-login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { PendingPaymentComponent } from './components/payment/pending-payment/pending-payment.component';
+import { ApprovePaymentComponent } from './components/payment/approve-payment/approve-payment.component';
+import { TransactionHistoryComponent } from './components/payment/transaction-history/transaction-history.component';
+import { FinancialStatementComponent } from './components/payment/financial-statement/financial-statement.component';
+import { DateAsAgoPipe } from './Utils/pipe/date-as-ago.pipe';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: "red",
   pbColor: "red",
   fgsColor: "red",
-  bgsOpacity: 0.5,
+  bgsOpacity: 0.3,
   bgsPosition: POSITION.centerCenter,
   bgsSize: 40,
   bgsType: SPINNER.rectangleBounce, // background spinner type
@@ -61,6 +66,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ExpenseIncomeComponent,
     ExpenseIncomeGraphComponent,
     AdminLoginComponent,
+    ApprovePaymentComponent,
+    PendingPaymentComponent,
+    TransactionHistoryComponent,
+    FinancialStatementComponent,
+    DateAsAgoPipe,
+    
 
 
   ],
@@ -74,7 +85,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgChartsModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
 
 
   ],
