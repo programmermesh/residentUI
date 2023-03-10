@@ -8,11 +8,13 @@ import { ManageUsersComponent } from './components/manage-users/manage-users.com
 import { VisitorComponent } from './components/visitor/visitor.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { HomeComponent } from './layout/home/home.component';
+import { LandingComponent } from './layout/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'welcome', component: LandingComponent },
   {
     path: 'home',
     component: HomeComponent,

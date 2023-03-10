@@ -15,4 +15,5 @@ import { NoticeComponent } from './notice/notice.component';
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
+
 export class ComponentsModule { }

@@ -20,6 +20,9 @@ import { VisitorComponent } from './components/visitor/visitor.component';
 import { ComponentsModule } from './components/components.module';
 import { Constants } from './services/BaseHttp/base-http.service';
 import { LevyComponent } from './components/levy/levy.component';
+import { LandingComponent } from './layout/landing/landing.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { LevyComponent } from './components/levy/levy.component';
     ManageUsersComponent,
     ManageResidentsComponent,
     VisitorComponent,
-    LevyComponent
+    LevyComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ import { LevyComponent } from './components/levy/levy.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule, 
+    NgbCarouselModule
   ],
   providers: [FormValidation,Constants],
   bootstrap: [AppComponent],

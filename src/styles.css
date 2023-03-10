@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import '/src/assets/css/css/materialdesignicons.min.css';
+@import '/src/assets/css/css/tiny-slider.css';
+ @import '/src/assets/css/css/style.css';
+@import '/src/assets/css/css/colors/default.css'; */
 * {
     margin: 0;
 }
