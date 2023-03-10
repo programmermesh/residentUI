@@ -17,7 +17,10 @@ import { FormValidation } from './auth/helpers/form-validation';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { ManageResidentsComponent } from './components/manage-residents/manage-residents.component';
 import { VisitorComponent } from './components/visitor/visitor.component';
+import { ComponentsModule } from './components/components.module';
+import { Constants } from './services/BaseHttp/base-http.service';
 import { LevyComponent } from './components/levy/levy.component';
+<<<<<<< HEAD
 import { Constants } from './services/BaseHttp/base-http.service';
 import { NoticeComponent } from './components/notice/notice.component';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER } from 'ngx-ui-loader';
@@ -41,6 +44,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   pbThickness: 5, // progress bar thickness
 
 };
+=======
+import { LandingComponent } from './layout/landing/landing.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+
+>>>>>>> olajide
 
 @NgModule({
   declarations: [
@@ -57,12 +65,16 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ManageResidentsComponent,
     VisitorComponent,
     LevyComponent,
+<<<<<<< HEAD
     NoticeComponent,
     ExpenseIncomeComponent,
     ExpenseIncomeGraphComponent,
     AdminLoginComponent,
 
 
+=======
+    LandingComponent
+>>>>>>> olajide
   ],
   imports: [
     BrowserModule,
@@ -70,6 +82,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+<<<<<<< HEAD
     NotificationModule,
     NgChartsModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
@@ -79,7 +92,14 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 
   ],
   providers: [FormValidation, Constants],
+=======
+    ComponentsModule, 
+    NgbCarouselModule
+  ],
+  providers: [FormValidation,Constants],
+>>>>>>> olajide
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports:[FooterComponent,HeaderComponent,SidebarComponent]
 })
 export class AppModule { }

@@ -14,6 +14,7 @@ export class NoticeComponent implements OnInit {
   public createNewNotice!: FormGroup;
   public requestedData! : AllNotices;
   public isUpdate : boolean = false;
+  public idToBeUpdated = "";
   constructor(
     public noticeService: NoticeService,
     public formvalidation: FormValidation
@@ -68,7 +69,7 @@ export class NoticeComponent implements OnInit {
    * edit a notice
    */
   editNotice(notice:AllNotices ) {
-
+this.idToBeUpdated = notice.id;
     this.createNewNotice.patchValue({
       title: notice.title,
       id: notice.id,
@@ -84,9 +85,10 @@ export class NoticeComponent implements OnInit {
    * Update a notice by Id
    */
 
-  UpdateNotice(id: string) {
-   
-    this.noticeService.UpdateANoticeById(id)
+  UpdateNotice() {
+   debugger
+
+    this.noticeService.UpdateANoticeById(this.idToBeUpdated)
     .subscribe({
       next: (res: any) => {
         if (res.responseCode == '00') {

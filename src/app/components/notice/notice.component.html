@@ -25,11 +25,16 @@
           <th scope="col">Title</th>
           <th scope="col">Content</th>
           <th scope="col"></th>
+<<<<<<< HEAD
 
+=======
+          
+>>>>>>> olajide
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let n of getAllNotices;let i=index">
+<<<<<<< HEAD
           <td>
             <span class="text-muted">{{1+i}}</span>
           </td>
@@ -119,3 +124,93 @@
 
   </div>
 </div>
+=======
+            <td>
+                <span class="text-muted">{{1+i}}</span>
+              </td>
+            <td class="table-user">
+              <b>{{n.id}}</b>
+            </td>
+            <td>
+              <span class="text-muted">{{n.title}}</span>
+            </td>
+            <td>
+              <span  class="font-weight-bold">{{n.content}}</span>
+            </td>
+          
+            <td class="table-actions">
+              <a  (click)="editNotice(n)" class="table-action"
+              data-toggle="modal"
+              data-target="#createNoticeModal">
+                <i class="fas fa-user-edit"></i>
+              </a>
+              <a (click)="confirmDelete(n)"
+              data-toggle="modal"
+              data-target="#deleteNoticeModal"
+              class="table-action table-action-delete">
+                <i class="fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <div class="modal fade" id="createNoticeModal" tabindex="-1" role="dialog" aria-labelledby="createNoticeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createNoticeModalLabel">Add New Notice</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="createNewNotice" (ngSubmit)="CreateNewNoticeMethod(createNewNotice.value)">
+        <div class="modal-body">
+         
+            <div class="form-group mb-2">
+              <label class="form-control-label">Title</label>
+              <input class="form-control form-control" type="text" placeholder="Title" formControlName="title">
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-control-label">Content</label>
+              <input class="form-control form-control" type="text" placeholder="Content" formControlName="content">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button *ngIf="!isUpdate"  type="submit" class="btn btn-primary" [disabled]="!createNewNotice.valid">Add Notice</button>
+          <button *ngIf="isUpdate"  type="button" class="btn btn-primary" (click)="UpdateNotice()" [disabled]="!createNewNotice.valid">Update Notice</button>
+        </div>
+    </form>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <!--  Delete confirmation Modal  -->
+
+  <div class="modal fade" id="deleteNoticeModal" tabindex="-1" role="dialog" aria-labelledby="DeleteNoticeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <h3 style="text-align: center I !important;"> Confirm you want to delete the notice with title <strong>{{requestedData?.title}}</strong></h3> 
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+          <button type="submit" class="btn btn-primary" (click)="deleteNotice(requestedData.id)">Delete</button>
+        </div>
+  
+      </div>
+      
+    </div>
+  </div>
+>>>>>>> olajide

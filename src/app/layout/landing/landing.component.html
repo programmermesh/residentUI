@@ -1,0 +1,940 @@
+<div>
+  <!-- Navbar STart -->
+  <header id="topnav" class="defaultscroll sticky">
+    <div class="container">
+      <!-- Logo container-->
+      <a class="logo" href="index.html">
+        <span class="logo-light-mode">
+          <img
+            src="../../../assets/img/logo.png"
+            class="l-dark"
+            height="54"
+            alt=""
+          />
+          <img
+            src="../../../assets/img/logo.png"
+            class="l-light"
+            height="54"
+            alt=""
+          />
+        </span>
+        <img
+          src="../../../assets/img/logo.png"
+          height="54"
+          class="logo-dark-mode"
+          alt=""
+        />
+      </a>
+      <div class="buy-button">
+        <a class="btn btn-primary" target="_blank">Login</a>
+      </div>
+      <!--end login button-->
+      <!-- End Logo container-->
+      <div class="menu-extras">
+        <div class="menu-item">
+          <!-- Mobile menu toggle-->
+          <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+            <div class="lines">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
+          <!-- End mobile menu toggle-->
+        </div>
+      </div>
+
+      <div id="navigation">
+        <!-- Navigation Menu-->
+
+        <!--end navigation menu-->
+        <div class="buy-menu-btn d-none">
+          <a class="btn btn-primary" routerLink="/login">Login</a>
+        </div>
+        <!--end login button-->
+      </div>
+      <!--end navigation-->
+    </div>
+    <!--end container-->
+  </header>
+  <!--end header-->
+  <!-- Navbar End -->
+
+  <section class="home-slider position-relative">
+    <div
+      id="carouselExampleInterval"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+          <div
+            class="bg-home bg-animation-left d-flex align-items-center"
+            style="background-image: url('../../../assets/img/3.jpg')"
+          >
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-lg-7 col-md-7">
+                  <div
+                    class="title-heading position-relative mt-4"
+                    style="z-index: 1"
+                  >
+                    <h1 class="heading mb-3">Resident Manangement System</h1>
+                    <p class="para-desc">
+                      Manages residential experiences for residents in a
+                      location and provides security updates for visitors .
+                    </p>
+                    <div class="mt-4 pt-2">
+                      <!-- <a  data-type="youtube" data-id="yba7hPeTSjk" class="btn btn-icon btn-pills btn-primary lightbox"><i data-feather="video" class="icons"></i></a><span class="fw-bold text-uppercase small align-middle ms-2">Watch Now</span> -->
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-3" > 
+                  <ngb-carousel>
+                    <ng-template ngbSlide *ngFor="let image of images">
+                      <div class="picsum-img-wrapper">
+                        <img [src]="image.picture" />
+                      </div>
+
+                      <div class="carousel-caption">
+                        <h3>{{ image.random }}</h3>
+                      </div>
+                    </ng-template>
+                  </ngb-carousel>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="3000">
+          <div
+            class="bg-home bg-animation-left d-flex align-items-center"
+            style="background-image: url('../../../assets/img/2.jpg')"
+          >
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-lg-7 col-md-7">
+                  <div
+                    class="title-heading position-relative mt-4"
+                    style="z-index: 1"
+                  >
+                    <h1 class="heading mb-3">Resident Manangement System</h1>
+                    <p class="para-desc">
+                      Manages residential experiences for residents in a
+                      location and provides security updates for visitors .
+                    </p>
+                    <div class="mt-4 pt-2">
+                      <!-- <a  class="btn btn-primary"><i class="uil uil-briefcase"></i> Aboutus</a> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="3000">
+          <div
+            class="bg-home bg-animation-left d-flex align-items-center"
+            style="background-image: url('../../../assets/img/1.jpg')"
+          >
+            <div class="container">
+              <div class="row align-items-center">
+                <div class="col-lg-7 col-md-7">
+                  <div
+                    class="title-heading position-relative mt-4"
+                    style="z-index: 1"
+                  >
+                    <h1 class="heading mb-3">Resident Manangement System</h1>
+                    <p class="para-desc">
+                      Manages residential experiences for residents in a
+                      location and provides security updates for visitors .
+                    </p>
+                    <div class="mt-4 pt-2">
+                      <!-- <a href="#bookroom" class="btn btn-primary"><i class="uil uil-home"></i> Book now</a> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleInterval"
+        role="button"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleInterval"
+        role="button"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </a>
+    </div>
+  </section>
+  <!--end section-->
+
+  <!-- Start -->
+  <section class="section">
+    <div class="container" style="margin-top: 10px !important">
+      <div class="row justify-content-center">
+        <div class="col-xl-11 col-12 text-center mt-sm-0 pt-sm-0">
+          <div class="text-center features-absolute">
+            <ul
+              class="nav nav-pills shadow border-bottom flex-column flex-sm-row d-md-inline-flex nav-justified mb-0 bg-white rounded-top position-relative overflow-hidden"
+              id="pills-tab"
+              role="tablist"
+            >
+              <!-- <li class="nav-item m-1">
+                                <a class="nav-link py-2 px-5 active rounded" id="buy-login" data-bs-toggle="pill" href="#buy" role="tab" aria-controls="buy" aria-selected="false">
+                                    <div class="text-center">
+                                        <h6 class="mb-0" style="color:rgb(255, 255, 255)">Services</h6>
+                                    </div>
+                                </a>
+                            </li> -->
+              <!--end nav item-->
+
+              <!-- <li class="nav-item m-1">
+                                <a class="nav-link py-2 px-5 rounded" id="sold-login" data-bs-toggle="pill" href="#sold" role="tab" aria-controls="sold" aria-selected="false">
+                                    <div class="text-center">
+                                        <h6 class="mb-0">Sold</h6>
+                                    </div>
+                                </a>
+                               
+                            </li> -->
+              <!--end nav item-->
+
+              <!-- <li class="nav-item m-1">
+                                <a class="nav-link py-2 px-5 rounded" id="rent-login" data-bs-toggle="pill" href="#rent" role="tab" aria-controls="rent" aria-selected="false">
+                                    <div class="text-center">
+                                        <h6 class="mb-0">Rent</h6>
+                                    </div>
+                                </a>
+                               
+                            </li>
+                           -->
+            </ul>
+
+            <div
+              class="tab-content bg-white rounded-bottom shadow"
+              id="pills-tabContent"
+            >
+              <div
+                class="card border-0 tab-pane fade show active"
+                id="buy"
+                role="tabpanel"
+                aria-labelledby="buy-login"
+              >
+                <form class="card-body text-start">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <!-- <div class="mb-3"> -->
+
+                      <!-- <label class="form-label">Service : </label> -->
+                      <!-- <div class="form-icon position-relative"> -->
+
+                      <!-- </div> -->
+                      <!-- </div> -->
+                    </div>
+                    <!-- end col -->
+
+                    <div class="col-lg-6 col-md-6 col-12">
+                      <div class="mb-3">
+                        <!-- <label class="form-label">Select Service:</label> -->
+                        <!-- <img src="../../../assets/img/search.png" height="54" class="logo-dark-mode" alt="" > -->
+
+                        <select
+                          class="form-control custom-select"
+                          id="buy-properties"
+                        >
+                          <option>Resturants</option>
+                          <option>Tennis courts</option>
+                          <option>Clubs</option>
+                          <option>Eatery</option>
+                          <option>Hospital</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-12">
+                        <div class="mb-3">
+                          <!-- <label class="form-label">Select Service:</label> -->
+                        </div>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <!-- <div class="col-lg-3 col-md-6 col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Min Price :</label>
+                                                <select class="form-control custom-select" id="buy-min-price">
+                                                    <option>Min Price</option>
+                                                    <option>500</option>
+                                                    <option>1000</option>
+                                                    <option>2000</option>
+                                                    <option>3000</option>
+                                                    <option>4000</option>
+                                                    <option>5000</option>
+                                                    <option>6000</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+
+                    <!--end col-->
+
+                    <!-- <div class="col-lg-3 col-md-6 col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Max Price :</label>
+                                                <select class="form-control custom-select" id="buy-max-price">
+                                                    <option>Max Price</option>
+                                                    <option>500</option>
+                                                    <option>1000</option>
+                                                    <option>2000</option>
+                                                    <option>3000</option>
+                                                    <option>4000</option>
+                                                    <option>5000</option>
+                                                    <option>6000</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+                    <!--end col-->
+
+                    <div class="col-12">
+                      <a href="javascript:void(0)" class="btn btn-primary"
+                        >Search now</a
+                      >
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+                <!--end form-->
+              </div>
+              <!--end teb pane-->
+
+              <div
+                class="card border-0 tab-pane fade"
+                id="sold"
+                role="tabpanel"
+                aria-labelledby="sold-login"
+              >
+                <form class="card-body text-start">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Search :</label>
+                        <div class="form-icon position-relative">
+                          <i
+                            data-feather="search"
+                            class="fea icon-sm icons"
+                          ></i>
+                          <input
+                            name="name"
+                            id="name1"
+                            type="text"
+                            class="form-control ps-5"
+                            placeholder="Search your home :"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Select Categories:</label>
+                        <select
+                          class="form-control custom-select"
+                          id="buy-properties2"
+                        >
+                          <option>Houses</option>
+                          <option>Apartment</option>
+                          <option>Offices</option>
+                          <option>Townhome</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Min Price :</label>
+                        <select
+                          class="form-control custom-select"
+                          id="buy-min-price2"
+                        >
+                          <option>Min Price</option>
+                          <option>500</option>
+                          <option>1000</option>
+                          <option>2000</option>
+                          <option>3000</option>
+                          <option>4000</option>
+                          <option>5000</option>
+                          <option>6000</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Max Price :</label>
+                        <select
+                          class="form-control custom-select"
+                          id="buy-max-price2"
+                        >
+                          <option>Max Price</option>
+                          <option>500</option>
+                          <option>1000</option>
+                          <option>2000</option>
+                          <option>3000</option>
+                          <option>4000</option>
+                          <option>5000</option>
+                          <option>6000</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-12">
+                      <a href="javascript:void(0)" class="btn btn-primary"
+                        >Search now</a
+                      >
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+                <!--end form-->
+              </div>
+              <!--end teb pane-->
+
+              <div
+                class="card border-0 tab-pane fade"
+                id="rent"
+                role="tabpanel"
+                aria-labelledby="rent-login"
+              >
+                <form class="card-body text-start">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Search :</label>
+                        <div class="form-icon position-relative">
+                          <i
+                            data-feather="search"
+                            class="fea icon-sm icons"
+                          ></i>
+                          <input
+                            name="name"
+                            id="name2"
+                            type="text"
+                            class="form-control ps-5"
+                            placeholder="Search your home :"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Select Categories:</label>
+                        <select
+                          class="form-control custom-select"
+                          id="buy-properties3"
+                        >
+                          <option>Houses</option>
+                          <option>Apartment</option>
+                          <option>Offices</option>
+                          <option>Townhome</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Min Price :</label>
+                        <select
+                          class="form-control custom-select"
+                          id="buy-min-price3"
+                        >
+                          <option>Min Price</option>
+                          <option>500</option>
+                          <option>1000</option>
+                          <option>2000</option>
+                          <option>3000</option>
+                          <option>4000</option>
+                          <option>5000</option>
+                          <option>6000</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-3 col-md-6 col-12">
+                      <div class="mb-3 text-start">
+                        <label class="form-label">Max Price :</label>
+                        <select
+                          class="form-control custom-select"
+                          id="buy-max-price3"
+                        >
+                          <option>Max Price</option>
+                          <option>500</option>
+                          <option>1000</option>
+                          <option>2000</option>
+                          <option>3000</option>
+                          <option>4000</option>
+                          <option>5000</option>
+                          <option>6000</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-12">
+                      <a href="javascript:void(0)" class="btn btn-primary"
+                        >Search now</a
+                      >
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+                <!--end form-->
+              </div>
+              <!-- testt -->
+              <div>
+                <!-- <ngb-carousel >
+                  <ng-template ngbSlide *ngFor="let image of images"
+                    >
+                    <div class="picsum-img-wrapper">
+                       <img [src]="image.picture" />
+                    </div>
+                    
+                    <div class="carousel-caption">
+                      
+                      <h3>{{ image.random }}</h3>
+                      
+                    </div>
+                     </ng-template
+                  >
+                </ngb-carousel> -->
+              </div>
+              <!--end teb pane-->
+            </div>
+            <!--end tab content-->
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+
+    <div class="container mt-100 mt-30" style="margin-top: 10px !important">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="section-title mb-4 pb-2 text-center">
+            <h4 class="title mb-4">Business finder</h4>
+            <p class="text-muted para-desc mb-0 mx-auto">
+              Residents Business
+              <span class="text-primary fw-bold">Finder</span>
+            </p>
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mt-4 pt-2">
+          <div class="card team bg-light text-center rounded shadow border-0">
+            <div class="card-body">
+              <div class="position-relative">
+                <img
+                  src="../../../assets/img/cardio.jpg"
+                  class="img-fluid avatar avatar-ex-large rounded-circle shadow"
+                  alt=""
+                />
+                <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="twitter" class="uil uil-twitter"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="facebook" class="uil uil-facebook"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="instagram" class="uil uil-instagram"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="linkedin" class="uil uil-linkedin"></i
+                    ></a>
+                  </li>
+                </ul>
+                <!--end icon-->
+              </div>
+              <div class="content pt-3">
+                <h5 class="mb-0">
+                  <a href="javascript:void(0)" class="name text-dark"
+                    >Ronny Hospitals</a
+                  >
+                </h5>
+
+                <small class="designation text-muted"> Health Care</small>
+                <br />
+                <small class="designation text-muted"> +234555566667</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+
+        <div class="col-lg-3 col-md-6 mt-4 pt-2">
+          <div class="card team bg-light text-center rounded shadow border-0">
+            <div class="card-body">
+              <div class="position-relative">
+                <img
+                  src="../../../assets/img/6.jpg"
+                  class="img-fluid avatar avatar-ex-large rounded-circle shadow"
+                  alt=""
+                  width="60"
+                />
+                <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="twitter" class="uil uil-twitter"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="facebook" class="uil uil-facebook"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="instagram" class="uil uil-instagram"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="linkedin" class="uil uil-linkedin"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="content pt-3">
+                <h5 class="mb-0">
+                  <a href="javascript:void(0)" class="name text-dark"
+                    >RMS High School</a
+                  >
+                </h5>
+                <small class="designation text-muted">Education</small>
+                <br />
+
+                <small class="designation text-muted"> +234555566667</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+
+        <div class="col-lg-3 col-md-6 mt-4 pt-2">
+          <div class="card team bg-light text-center rounded shadow border-0">
+            <div class="card-body">
+              <div class="position-relative">
+                <img
+                  src="../../../assets/img/ride.png"
+                  class="img-fluid avatar avatar-ex-large rounded-circle shadow"
+                  alt=""
+                />
+                <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="twitter" class="uil uil-twitter"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="facebook" class="uil uil-facebook"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="instagram" class="uil uil-instagram"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="linkedin" class="uil uil-linkedin"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="content pt-3">
+                <h5 class="mb-0">
+                  <a href="javascript:void(0)" class="name text-dark"
+                    >Alia Ride</a
+                  >
+                </h5>
+                <small class="designation text-muted">Transportation</small>
+                <br />
+
+                <small class="designation text-muted"> +234555566667</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+
+        <div class="col-lg-3 col-md-6 mt-4 pt-2">
+          <div class="card team bg-light text-center rounded shadow border-0">
+            <div class="card-body">
+              <div class="position-relative">
+                <img
+                  src="../../../assets/img/plumber.jpg"
+                  class="img-fluid avatar avatar-ex-large rounded-circle shadow"
+                  alt=""
+                />
+                <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="twitter" class="uil uil-twitter"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="facebook" class="uil uil-facebook"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="instagram" class="uil uil-instagram"></i
+                    ></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="rounded"
+                      ><i data-feather="linkedin" class="uil uil-linkedin"></i
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="content pt-3">
+                <h5 class="mb-0">
+                  <a class="name text-dark">Ernest and Co</a>
+                </h5>
+                <small class="designation text-muted">Plumbing</small>
+                <br />
+
+                <small class="designation text-muted"> +234555566667</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+
+    <div class="container mt-100 mt-60" style="margin-top: 10px !important">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="section-title mb-4 pb-2 text-center">
+            <!-- <span class="badge rounded-pill bg-soft-primary">Results</span> -->
+            <h4 class="title mt-3 mb-4">Our services</h4>
+            <!-- <p class="text-muted para-desc mb-0 mx-auto">Start working with <span class="text-primary fw-bold">Landrick</span> that can provide everything you need to generate awareness, drive traffic, connect.</p> -->
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+          <div
+            class="card border-0 text-center features feature-clean rounded"
+            style="margin-bottom: 10px !important"
+          >
+            <div class="icons text-primary text-center mx-auto">
+              <i class="uil uil-money-bill d-block rounded h3 mb-0"></i>
+            </div>
+
+            <div class="card-body p-0 mt-4">
+              <a class="title h5 text-dark">Payments </a>
+              <p class="text-muted mt-3 mb-0">
+                Manages the different payment types.
+              </p>
+              <div class="mt-2">
+                <a class="text-primary"
+                  >Read More
+                  <i data-feather="arrow-right" class="fea icon-sm"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+
+        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+          <div class="card border-0 text-center features feature-clean rounded">
+            <div class="icons text-primary text-center mx-auto">
+              <i class="uil uil-suitcase d-block rounded h3 mb-0"></i>
+            </div>
+
+            <div class="card-body p-0 mt-4">
+              <a class="title h5 text-dark">Financial statement </a>
+              <p class="text-muted mt-3 mb-0">
+                Providing an end to end financial statement.
+              </p>
+
+              <div class="mt-2">
+                <a class="text-primary"
+                  >Read More
+                  <i data-feather="arrow-right" class="fea icon-sm"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+        <!-- uil:estate -->
+        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+          <div class="card border-0 text-center features feature-clean rounded">
+            <div class="icons text-primary text-center mx-auto">
+              <i class="uil uil-users-alt d-block rounded h3 mb-0"></i>
+            </div>
+
+            <div class="card-body p-0 mt-4">
+              <a href="javascript:void(0)" class="title h5 text-dark"
+                >Visitor Management</a
+              >
+              <p class="text-muted mt-3 mb-0">
+                Provide a robust security feature for visitors' mgt
+              </p>
+
+              <div class="mt-2">
+                <a class="text-primary"
+                  >Read More
+                  <i data-feather="arrow-right" class="fea icon-sm"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+  </section>
+  <!--end section-->
+  <!-- End -->
+
+  <!--end section-->
+
+  <!-- Footer Start -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
+          <a href="#" class="logo-footer">
+            <!-- <img src="images/logo-light.png" height="24" alt=""> -->
+          </a>
+          <p class="mt-4">
+            Resident management system takes care of your residents activities
+            in the community
+          </p>
+          <ul class="list-unstyled social-icon team-icon mb-0 mt-4">
+            <li class="list-inline-item">
+              <a class="rounded"
+                ><i data-feather="twitter" class="uil uil-twitter-alt"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="rounded"
+                ><i data-feather="facebook" class="uil uil-facebook-alt"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="rounded"
+                ><i data-feather="instagram" class="uil uil-instagram-alt"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="rounded"
+                ><i data-feather="linkedin" class="uil uil-linkedin-alt"></i
+              ></a>
+            </li>
+          </ul>
+          <!--end icon-->
+        </div>
+        <!--end col-->
+
+        <div class="col-lg-4 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+          <h5 class="text-light footer-head">Services</h5>
+          <ul class="list-unstyled footer-list mt-4">
+            <li><a class="text-foot">Payments</a></li>
+            <li><a class="text-foot">Financial statement</a></li>
+            <li><a class="text-foot">Visitor Management</a></li>
+          </ul>
+        </div>
+        <!--end col-->
+
+        <div class="col-lg-4 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+          <h5 class="text-light footer-head">Places</h5>
+          <ul class="list-unstyled footer-list mt-4">
+            <li><a class="text-foot"> Hospitals </a></li>
+            <li><a class="text-foot"> Sport centers </a></li>
+            <li><a class="text-foot"> Resturants </a></li>
+            <li><a class="text-foot"> Public car parks </a></li>
+            <!-- <li><a href="page-privacy.html" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Privacy Policy</a></li>
+                        <li><a href="documentation.html" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Documentation</a></li>
+                        <li><a href="changelog.html" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Changelog</a></li>
+                        <li><a href="components.html" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Components</a></li> -->
+          </ul>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </footer>
+  <!--end footer-->
+</div>
+
+<script>
+  /*!-----------------------------------------------------------------------------
+   * easy_background
+   * v2.0 - built 2017-10-30
+   * Licensed under the MIT License.
+   * http://www.testersite.it/github/easy_background/v3/
+   * ----------------------------------------------------------------------------
+   * Copyright (C) 2017 Eugenio Segala
+   * --------------------------------------------------------------------------*/
+
+  // easy_background("#home",
+  //         {
+  //             slide: ["../assets/img/1.jpg", "../../../assets/img/2.jpg", "../../../assets/img/3.jpg"],
+  //             delay: [2000, 2000, 2000]
+  //         }
+  //     );
+</script>
+
+<!-- javascript -->
+<!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+<!-- SLIDER -->
