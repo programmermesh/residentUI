@@ -234,6 +234,20 @@ a.text-primary:focus {
   color: #284bc1 !important;
 }
 
+.bg-secondary {
+  background-color: #5a6d90 !important;
+}
+
+.bg-soft-secondary {
+  background-color: rgba(90, 109, 144, 0.1) !important;
+  border: 1px solid rgba(90, 109, 144, 0.1) !important;
+  color: #5a6d90 !important;
+}
+
+.text-secondary {
+  color: #5a6d90 !important;
+}
+
 a {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -246,6 +260,12 @@ a.text-secondary:focus {
 
 .bg-success {
   background-color: #2eca8b !important;
+}
+
+.bg-soft-success {
+  background-color: rgba(46, 202, 139, 0.1) !important;
+  border: 1px solid rgba(46, 202, 139, 0.1) !important;
+  color: #2eca8b !important;
 }
 
 .text-success {
@@ -530,9 +550,9 @@ small {
   font-size: 90%;
 }
 
-// .card .card-body {
-//   padding: 1.5rem;
-// }
+.card .card-body {
+  padding: 1.5rem;
+}
 
 .component-wrapper .title {
   font-size: 20px;
