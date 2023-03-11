@@ -16,12 +16,16 @@ export class ApprovePaymentComponent implements OnInit {
   pendingPaymentList: any = [];
   paymentDetail: any;
   paymentList: any= [];
+  loggedInUser: any;
+  userType: any;
   constructor(
     private paymentService: PaymentService,
     private loaderService: NgxUiLoaderService,
     private notifier: NotificationService
   ) { }
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('user')!);
+    this.userType = this.loggedInUser.type;
     this.getPendingPayments()
     this.getApprovedPayment()
 

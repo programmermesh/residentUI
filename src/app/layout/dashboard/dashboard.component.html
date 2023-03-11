@@ -1,4 +1,4 @@
-<!-- <app-expense-income-graph></app-expense-income-graph> -->
+<app-expense-income-graph></app-expense-income-graph>
 
 <div class="row">
     <div class="col-xl-6">
@@ -46,13 +46,13 @@
                                     <!-- <span class="text-success">●</span> -->
                                     <small>@{{list.username}}</small>
                                 </div>
-                                <div class="col-auto">
+                                <div class="col-auto" *ngIf="userType=='Admin'" >
                                     <button type="button" (click)="getResidentById(list.id)"
                                         class="btn btn-sm btn-primary" data-toggle="modal"
                                         data-target="#exampleModal">View Details</button>
 
 
-                                    <button type="button" [routerLink]="['/home/payment/pending']"
+                                    <button type="button" [routerLink]="['/home/payment/add']"
                                         [queryParams]="{residentId: list.id}"
                                         class="btn btn-sm btn-outline-success">Payment</button>
                                 </div>
@@ -123,7 +123,8 @@
                             <div [ngClass]="list.checkin? 'checklist-item-success':'checklist-item-danger'"
                                 class=" checklist-item ">
                                 <div class="checklist-info">
-                                    <h5 class="checklist-title mb-0">{{list.name | uppercase}} - <i>{{list.discription}}</i>
+                                    <h5 class="checklist-title mb-0">{{list.name | uppercase}} -
+                                        <i>{{list.discription}}</i>
                                     </h5>
                                     <small *ngIf="list.checkin"><i class="fas fa-arrow-up text-success mr-2"></i>Last
                                         CheckIn -
@@ -133,25 +134,26 @@
                                         Last CheckOut - <i>{{list.checkoutDate |
                                             date:'medium'}}</i></small>
                                 </div>
-    
+
                                 <ng-container *ngIf="list.checkout || (list.checkout==false && list.checkin==false)">
-                                    <button class="btn btn-icon btn-sm mr-2  btn-outline-success"
-                                        [hidden]="list.checkout==true" type="button" (click)="updateVisitor(true,list.id)">
+                                    <button *ngIf="userType=='Admin' || userType=='Security'"  class="btn btn-icon btn-sm mr-2  btn-outline-success"
+                                        [hidden]="list.checkout==true" type="button"
+                                        (click)="updateVisitor(true,list.id)">
                                         <span class="btn-inner--text"> Check In
                                         </span>
                                     </button>
                                 </ng-container>
-    
+
                                 <ng-container *ngIf="list.checkin">
-                                    <button class="btn btn-icon btn-sm btn-outline-primary" type="button"
+                                    <button *ngIf="userType=='Admin' || userType=='Security'"   class=" btn btn-icon btn-sm btn-outline-primary" type="button"
                                         (click)="updateVisitor(false,list.id)">
                                         <span class="btn-inner--text">Check Out
                                         </span>
                                     </button>
                                 </ng-container>
-    
+
                             </div>
-    
+
                         </li>
                         <div class="container">
                             <div class="float-right"> <pagination-controls id="visitors" class="pagination"
@@ -159,7 +161,7 @@
                         </div>
                     </ul>
                 </ng-container>
-             
+
                 <ng-template #noVisitorTemplate>
                     <ul class="list-group list-group-flush list my--3">
                         <hr>
@@ -193,7 +195,8 @@
             <div class="card-body">
                 <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                     <ng-container *ngIf="getAllNotices?.length>0; else noNoticeTemplate">
-                        <div class="timeline-block" *ngFor="let list of getAllNotices.reverse()| paginate: {id: 'notice', itemsPerPage: 5, currentPage: n };">
+                        <div class="timeline-block"
+                            *ngFor="let list of getAllNotices.reverse()| paginate: {id: 'notice', itemsPerPage: 5, currentPage: n };">
                             <span class="timeline-step badge-success">
                                 <i class="ni ni-bell-55"></i>
                             </span>
@@ -266,32 +269,34 @@
                                 <div class="col-md-4">
                                     <label class="form-control-label">Other Names</label>
                                     <input class="form-control form-control" [disabled]="true"
-                                        [value]="selectedResidentData.other_names" type="text" placeholder="Other Names" />
+                                        [value]="selectedResidentData.other_names" type="text"
+                                        placeholder="Other Names" />
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <label class="form-control-label">Username</label>
                                     <input class="form-control form-control" [disabled]="true"
                                         [value]="selectedResidentData.username" type="text" placeholder="Username" />
                                 </div>
                             </div>
-    
+
                             <div class="form-row mb-2">
                                 <div class="col-md-4">
                                     <label class="form-control-label">Employment Status</label>
                                     <select class="form-control" [disabled]="true">
                                         <option [value]="selectedResidentData.status">
                                             {{selectedResidentData.employment_status}}</option>
-    
-    
+
+
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-control-label">Profession</label>
                                     <input class="form-control form-control" [disabled]="true"
-                                        [value]="selectedResidentData.profession" type="text" placeholder="Profession" />
+                                        [value]="selectedResidentData.profession" type="text"
+                                        placeholder="Profession" />
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <label class="form-control-label">Date Of Entry</label>
                                     <input class="form-control form-control" [disabled]="true"
@@ -299,29 +304,29 @@
                                 </div>
                             </div>
                             <div class="form-row mb-2">
-    
+
                                 <div class="col-md-4">
                                     <label class="form-control-label">Marital Status</label>
                                     <select class="form-control" [disabled]="true">
                                         <option [value]="selectedResidentData.status">{{selectedResidentData.status}}
                                         </option>
-    
+
                                     </select>
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <label class="form-control-label">Spouse Name</label>
                                     <input class="form-control form-control" [disabled]="true"
                                         [value]="selectedResidentData.spouseName" type="text" placeholder="Spouse" />
                                 </div>
-    
+
                                 <div class="col-md-4">
                                     <label class="form-control-label">Spouse Date of Birth</label>
                                     <input class="form-control form-control" [disabled]="true"
                                         [value]="selectedResidentData.spouse_dob" type="date" placeholder="DOB" />
                                 </div>
                             </div>
-    
+
                             <div class="form-row mb-2">
                                 <div class="col-md-6">
                                     <label class="form-control-label">Number of Children</label>
@@ -340,7 +345,7 @@
                   </p> -->
                                 </div>
                             </div>
-    
+
                             <div class="form-row mb-2">
                                 <div class="col-md-6">
                                     <label class="form-control-label">House Type</label>
@@ -355,23 +360,23 @@
                                         placeholder="e.g Martins, Victor, Benard" />
                                 </div>
                             </div>
-    
+
                             <div class="form-row mb-2">
                                 <div class="col-md-6">
                                     <label class="form-control-label">Gender</label>
                                     <select class="form-control" [disabled]="true">
                                         <option [value]="selectedResidentData.gender">{{selectedResidentData.gender}}
                                         </option>
-    
+
                                     </select>
                                 </div>
                             </div>
                         </form>
                     </ng-container>
 
-                    
-                <ng-template #noResidentTemplate>
-                   
+
+                    <ng-template #noResidentTemplate>
+
                         <div class="container p-5 mb-2">
                             <div class="text-center">
                                 <div *ngIf="residentDetailsLoading" class="spinner-border text-danger spinner-border-sm"
@@ -386,10 +391,10 @@
                             </div>
                         </div>
 
-                </ng-template>
+                    </ng-template>
 
 
-                 
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">

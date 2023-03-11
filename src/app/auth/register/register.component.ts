@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidation } from '../helpers/form-validation';
 import { AuthService } from '../service/auth.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -18,6 +18,9 @@ export class RegisterComponent implements OnInit {
   residentForm!: FormGroup;
   children: any = [];
   loading: boolean = false;
+  showStep1: boolean = true;
+  showStep2: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -28,45 +31,38 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.residentForm = this.fb.group({
-      lastname: [''],
-      other_names: [''],
-      gender: ['Select Gender'],
-      status: ['Select Status'],
-      phone_number1: [''],
+      lastname: ['', [Validators.required]],
+      other_names: ['', [Validators.required]],
+      gender: ['Select Gender', [Validators.required]],
+      status: ['Select Status', [Validators.required]],
+      phone_number1: ['', [Validators.required]],
       phone_number2: [''],
-      dob: [''],
-      employment_status: ['Select Employment Status'],
-      profession: [''],
-      date_of_entry: [''],
-      spouseName: [''],
-      spouse_dob: [''],
-      numberOfChildren: [''],
-      childrenName: [''],
-      houseNumber: [''],
-      houseType: [''],
-      username: [''],
-      password: [''],
+      dob: ['', [Validators.required]],
+      employment_status: ['Select Employment Status', [Validators.required]],
+      profession: ['', [Validators.required]],
+      date_of_entry: ['', [Validators.required]],
+      nameOfLandLord: ['', [Validators.required]],
+      streetName: ['', [Validators.required]],
+      spouseName: ['', [Validators.required]],
+      spouse_dob: ['', [Validators.required]],
+      numberOfChildren: ['', [Validators.required]],
+      childrenName: ['', [Validators.required]],
+      houseNumber: ['', [Validators.required]],
+      houseType: ['Select House Type', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      type: ['Resident']
     });
   }
 
-  registerUser(value: any) {
-    this.authService.registerResident(value).subscribe(
-      (res: any) => {
-        this.loaderService.stop();
-        console.log(res);
-        if (res.ResponseCode == '00') {
-        } else {
-        }
-      },
-      (error) => {
-        this.loaderService.stop();
-        console.log(error);
-      }
-    );
-  }
+
 
   registerResident() {
     this.loading = true;
+    if (!this.residentForm.valid) {
+      return this.notifier.notify(NotificationType.ERROR, "Please fill all required fields");
+      
+    }
     this.residentForm.value.childrenName = this.children;
     this.authService
       .registerResident(this.residentForm.value)
@@ -95,5 +91,15 @@ export class RegisterComponent implements OnInit {
     else {
       this.notifier.notify(NotificationType.WARNING, "You have reached the maximum number of children")
     }
+  }
+
+  gotoStep2() {
+    this.showStep1 = false;
+    this.showStep2 = true;
+  }
+
+  goBack() {
+    this.showStep1 = true;
+    this.showStep2 = false;
   }
 }

@@ -43,7 +43,7 @@
             <span class="font-weight-bold">{{n?.content}}</span>
           </td>
 
-          <td class="table-actions">
+          <td *ngIf="userType=='Admin'" class="table-actions">
             <a (click)="editNotice(n)" class="table-action">
               <i class="fas fa-user-edit"></i>
             </a>

@@ -19,6 +19,8 @@ export class VisitorComponent implements OnInit {
   newVisitorButton: boolean=false;
   loading: boolean = false;
   recordLoading: boolean=false;
+  loggedInUser: any;
+  userType: any;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -33,6 +35,8 @@ export class VisitorComponent implements OnInit {
   if(this.residentId){
     this.newVisitorButton=true;
   }
+  this.loggedInUser = JSON.parse(sessionStorage.getItem('user')!);
+  this.userType = this.loggedInUser.type;
     // this.getResidentById();
 
     this.visitorForm = this.fb.group({

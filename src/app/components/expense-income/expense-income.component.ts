@@ -19,6 +19,8 @@ export class ExpenseIncomeComponent implements OnInit {
   type: any = "Expense"	;
   totalIncome: number =0 ;
   totalExpense: number = 0;
+  loggedInUser: any;
+  userType: any;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -28,6 +30,8 @@ export class ExpenseIncomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('user')!);
+    this.userType = this.loggedInUser.type;
     this.expenseForm = this.fb.group({
       Name: [''],
       amount: [''],

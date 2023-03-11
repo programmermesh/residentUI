@@ -31,7 +31,7 @@
           <th>Last CheckIn</th>
           <th>Check Out</th>
           <th>Last CheckOut</th>
-          <th></th>
+          <th *ngIf="userType =='Admin'|| userType=='Security'"></th>
         </tr>
       </thead>
       <tbody>
@@ -65,7 +65,7 @@
           <td>
             <span>{{ list.checkoutDate | date:'medium' }}</span>
           </td>
-          <td class="table-actions">
+          <td *ngIf="userType =='Admin'|| userType=='Security'" class="table-actions">
             <a class="table-action">
               <i class="fas fa-user-edit"></i>
             </a>

@@ -50,7 +50,7 @@
                     <td>
                         <span>{{ list.amount | currency:'₦' }}</span>
                     </td>
-                   
+
                     <td>
                         <span>{{ list.month }}/{{ list.year }}</span>
                     </td>
@@ -97,7 +97,7 @@
                     <div class="form-row mb-1">
                         <div class="col-md-6">
                             <label class="form-control-label">Levy</label>
-                            <select class="form-control" (change)="onSelectedLevy($event)" >
+                            <select class="form-control" (change)="onSelectedLevy($event)">
                                 <option value="Select Levy">Select Levy</option>
                                 <option *ngFor="let list of levies" [value]="list.levyType">{{list?.levyType}}</option>
                             </select>
@@ -106,7 +106,7 @@
                         <div class="col-md-6">
                             <label class="form-control-label">Amount</label>
                             <input class="form-control form-control" type="text" [disabled]="true"
-                                [value]="levy?.amount | currency :'₦'" placeholder="₦0.00"  />
+                                [value]="levy?.amount | currency :'₦'" placeholder="₦0.00" />
                         </div>
 
 
@@ -115,13 +115,13 @@
                     <div class="form-row  mb-1">
                         <div class="col-md-6">
                             <label class="form-control-label">House Type</label>
-                            <input class="form-control form-control"[disabled]="true" type="text" 
+                            <input class="form-control form-control" [disabled]="true" type="text"
                                 [value]="resident?.houseType" />
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-control-label">House Number</label>
-                            <input class="form-control form-control"[disabled]="true" type="text" 
+                            <input class="form-control form-control" [disabled]="true" type="text"
                                 [value]="resident?.houseNumber" />
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                                 <option value="October">October</option>
                                 <option value="November">November</option>
                                 <option value="December">December</option>
-                             
+
                             </select>
                         </div>
 
@@ -166,8 +166,9 @@
 
                     <div class="form-group">
                         <label class="form-control-label">Payment Screenshot</label>
-                        <input type="file" size="2kb" accept="image/png,image/jpeg,image/jpg" (change)="onSelectedImage($event)" class="form-control">
-                        <img class="mt-2 text-center" [src]="imageSrc" style="max-width:200px;max-height:200px"/>
+                        <input type="file" size="2kb" accept="image/png,image/jpeg,image/jpg"
+                            (change)="onSelectedImage($event)" class="form-control">
+                        <img class="mt-2 text-center" [src]="imageSrc" style="max-width:200px;max-height:200px" />
                     </div>
                 </form>
             </div>

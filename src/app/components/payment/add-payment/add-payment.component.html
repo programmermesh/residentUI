@@ -1,0 +1,124 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+        <div class="row">
+            <div class="col-6">
+                <h3 class="mb-4">Make Payment</h3>
+            </div>
+        </div>
+
+        <form class="row mb-3">
+            <div class="col-md-9">
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">Name</label>
+                            <input class="form-control form-control" type="text" placeholder="Enter Name"
+                                [disabled]="true" [value]="resident?.lastname+ ' '+ resident?.other_names" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">Levy</label>
+                            <select class="form-control" (change)="onSelectedLevy($event)">
+                                <option value="Select Levy">Select Levy</option>
+                                <option *ngFor="let list of levies" [value]="list.levyType">{{list?.levyType}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">Amount</label>
+                            <input class="form-control form-control" type="text" [disabled]="true"
+                                [value]="levy?.amount | currency :'₦'" placeholder="₦0.00" />
+                        </div>
+                    </div>
+                   
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">House Type</label>
+                            <input class="form-control form-control" [disabled]="true" type="text"
+                                [value]="resident?.houseType" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">House Number</label>
+                            <input class="form-control form-control" [disabled]="true" type="text"
+                                [value]="resident?.houseNumber" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">Month</label>
+                            <select class="form-control" [(ngModel)]="month" name="month">
+                                <option value="Select Month">Select Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+
+                            </select>
+                        </div>
+                    </div>
+              
+                   
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">Year</label>
+                            <select class="form-control" [(ngModel)]="year" name="year">
+                                <option value="Select Year">Select Year</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group mb-1">
+                            <label class="form-control-label">Payment Screenshot</label>
+                            <input type="file" size="2kb" accept="image/png,image/jpeg,image/jpg"
+                                (change)="onSelectedImage($event)" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary w-100" style="margin-top: 34px;" (click)="makePendingPayment()">
+                                Add Payment  <span *ngIf="!loading" class="btn-inner--icon"><i class="ni ni-bold-right"></i></span>
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="image mt-3 text-center">
+                    <label class="form-control-label">Screenshot Preview</label>
+                <img class="mt-2 text-center" [src]="imageSrc" style="max-width:200px;max-height:200px" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

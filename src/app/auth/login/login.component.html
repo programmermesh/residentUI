@@ -1,11 +1,13 @@
 <div class="bg-default">
     <!-- Header -->
-    <div class="header bg-gradient-secondary py-7 pt-5">
+    <div class="header bg-gradient-secondary py-7 pt-1">
         <div class="container">
             <div class="header-body text-center mb-7">
                 <div class="row justify-content-center">
                     <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                        <h1 class="text-primary">Welcome Back!</h1>
+                        <div class="image">
+                            <img src="assets/img/logo.png" height="50" alt="logo" />
+                          </div>
                         <p class="text-lead text-white">
                             <!-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem praesentium ipsa cumque quis -->
                         </p>
@@ -25,14 +27,14 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary border-0 mb-0">
-                    <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-3">
+                    <div class="card-header bg-transparent ">
+                        <div class="text-muted text-center mt-2 ">
                             <h1>Login</h1>
                         </div>
 
                     </div>
                     <div class="card-body px-lg-5 py-lg-5">
-                       
+
                         <form role="form" [formGroup]="form">
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-merge input-group-alternative">
@@ -59,10 +61,12 @@
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary my-4" [disabled]="form.invalid"
+                                <button type="button" class="btn btn-primary w-100 my-4" [disabled]="form.invalid"
                                     (click)="loginUser(form.value)">
-                                    Login
-                                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Login <span *ngIf="!loading" class="btn-inner--icon"><i
+                                            class="ni ni-bold-right"></i></span>
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                                        aria-hidden="true"></span>
                                 </button>
                                 <div class="text-center text-muted mb-4">
                                     <a routerLink="/admin/login"><u>Sign in as admin</u></a>

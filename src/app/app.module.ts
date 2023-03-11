@@ -33,6 +33,8 @@ import { ApprovePaymentComponent } from './components/payment/approve-payment/ap
 import { TransactionHistoryComponent } from './components/payment/transaction-history/transaction-history.component';
 import { FinancialStatementComponent } from './components/payment/financial-statement/financial-statement.component';
 import { DateAsAgoPipe } from './Utils/pipe/date-as-ago.pipe';
+import { AddPaymentComponent } from './components/payment/add-payment/add-payment.component';
+import { MyTransactionHistoryComponent } from './components/payment/my-transaction-history/my-transaction-history.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: "red",
   pbColor: "red",
@@ -71,6 +73,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     TransactionHistoryComponent,
     FinancialStatementComponent,
     DateAsAgoPipe,
+    AddPaymentComponent,
+    MyTransactionHistoryComponent
     
 
 

@@ -6,7 +6,7 @@
                 <h3 class="mb-0">Manage Expense Income</h3>
             </div>
             <div class="col-6 text-right">
-                <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal"
+                <a *ngIf="userType=='Admin'" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal"
                     data-target="#exampleModal">
                     <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
                     <span class="btn-inner--text">New Record</span>
@@ -61,7 +61,7 @@
                     <th>Type</th>
                     <th>Date</th>
                     <th>Description</th>
-                    <th></th>
+                    <th *ngIf="userType=='Admin'"></th>
                 </tr>
             </thead>
             <tbody>
@@ -87,7 +87,7 @@
                         <span>{{ list.description }}</span>
                     </td>
 
-                    <td class="table-actions">
+                    <td *ngIf="userType=='Admin'" class="table-actions">
                         <a class="table-action">
                             <i class="fas fa-user-edit"></i>
                         </a>
@@ -195,4 +195,4 @@
     </div>
 </div>
 
-<!-- <app-expense-income-graph></app-expense-income-graph> -->
+<app-expense-income-graph></app-expense-income-graph>

@@ -18,6 +18,8 @@ export class NoticeComponent implements OnInit {
   public requestedData: any;
   public isUpdate: boolean = false;
   loading: boolean = false;
+  loggedInUser: any;
+  userType: any;
   constructor(
     public noticeService: NoticeService,
     public formvalidation: FormValidation,
@@ -29,7 +31,8 @@ export class NoticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllNoticesMethod();
-
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('user')!);
+    this.userType = this.loggedInUser.type;
   }
   /**
    * get all notices

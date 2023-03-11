@@ -15,6 +15,8 @@ import { PendingPaymentComponent } from './components/payment/pending-payment/pe
 import { ApprovePaymentComponent } from './components/payment/approve-payment/approve-payment.component';
 import { TransactionHistoryComponent } from './components/payment/transaction-history/transaction-history.component';
 import { FinancialStatementComponent } from './components/payment/financial-statement/financial-statement.component';
+import { AddPaymentComponent } from './components/payment/add-payment/add-payment.component';
+import { MyTransactionHistoryComponent } from './components/payment/my-transaction-history/my-transaction-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -33,9 +35,11 @@ const routes: Routes = [
       { path: "notice", component: NoticeComponent },
       { path: "expense", component: ExpenseIncomeComponent },
       { path: "payment/approve", component: ApprovePaymentComponent },
-      { path: "payment/pending", component: PendingPaymentComponent },
+      { path: "payment/add", component: AddPaymentComponent },
       { path: "transaction/history", component: TransactionHistoryComponent },
+      { path: "transaction/my/history", component: MyTransactionHistoryComponent },
       { path: "financial/statement", component: FinancialStatementComponent },
+   
     ],
   },
 ];

@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- Checklist -->
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header  border-0">
+                <!-- Title -->
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="mb-0">Transaction History</h3>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="float-right">
+                            <form class="form-inline my-2 my-md-0">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="filterTransaction"
+                                name="filterTransaction" placeholder="Search Record" autocomplete>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- Card body -->
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                   
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Levy</th>
+                                    <th>Amount</th>
+                                    <th>Month/Year</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngIf=" transactionList?.length>0; else noRecordTemplate">
+                                <tr *ngFor="let list of transactionList.reverse()|filter:filterTransaction | paginate: {id: 'transaction', itemsPerPage: 6, currentPage: p }; let i = index">
+                                    <td>
+                                        <span class="text-muted">{{ 1 + i }}</span>
+                                    </td>
+                                    <td class="table-user">
+                                        <b>{{ list.fullName }}</b>
+                                    </td>
+                                    <td>
+                                        <span>{{ list.levy }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ list.amount | currency:'₦' }}</span>
+                                    </td>
+    
+                                    <td>
+                                        <span>{{ list.month }} - {{ list.year }}</span>
+                                    </td>
+    
+                                    <td>
+                                        <span>{{ list.status }}</span>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noRecordTemplate>
+                                <tr>
+                                  <td colspan="6" class="text-center">
+                                    <div class="container p-5 mb-2">
+                                      <div class="text-center">
+                                        <div *ngIf="recordLoading" class="spinner-border text-danger spinner-border-sm" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                      
+                                        <span>
+                                          <h5 *ngIf="recordLoading" class=" text-muted">Fetching Records</h5>
+                                          <h5 *ngIf="!recordLoading" class=" text-muted">{{noRecordFound}}</h5>
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </ng-template>
+                            </tbody>
+                            
+                        </table>
+                        <div *ngIf=" transactionList?.length>0;" class="container">
+                            <div class="float-right"> <pagination-controls id="transaction" class="pagination"
+                                    (pageChange)="p = $event"></pagination-controls></div>
+                        </div>
+                    
+    
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

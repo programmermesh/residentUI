@@ -1,0 +1,26 @@
+.step {
+    height: 10px;
+    height: 7px;
+    width: 34px;
+    margin: 0 2px;
+    background: #a90b5a;
+    border: none;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.step-2 {
+    height: 10px;
+    height: 7px;
+    width: 34px;
+    margin: 0 2px;
+    background: #a90b5a;
+    opacity: 0.2;
+    border: none;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.indicator {
+    margin-bottom: 20px;
+}

@@ -26,12 +26,16 @@ export class DashboardComponent implements OnInit {
   loadingRecord: boolean = false;
   residentDetailsLoading: boolean = false;
   getAllNotices: any = [];
+  loggedInUser: any;
+  userType: any;
   constructor(private residentService: ResidentService,
     private loaderService: NgxUiLoaderService,
     private noticeService: NoticeService,
     private notifier: NotificationService) { }
 
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('user')!);
+    this.userType = this.loggedInUser.type;
     this.getVisitors()
     this.getResidents()
     this.getAllNoticesMethod()

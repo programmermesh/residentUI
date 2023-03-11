@@ -70,7 +70,7 @@
                                     <span>{{ list.status }}</span>
                                 </td>
 
-                                <td class="table-actions">
+                                <td *ngIf="userType=='Admin' || userType=='FinancialApproval'" class="table-actions">
                                     <a class="table-action" data-toggle="modal" data-target="#exampleModal"
                                         (click)="viewPayment(list)">
                                         <i class="fas fa-eye"></i>
@@ -133,7 +133,7 @@
                                     <span>{{ list.status }}</span>
                                 </td>
 
-                                <td class="table-actions">
+                                <td *ngIf="userType=='Admin'" class="table-actions">
                                     <a class="table-action table-action-delete">
                                         <i class="fas fa-trash"></i>
                                     </a>

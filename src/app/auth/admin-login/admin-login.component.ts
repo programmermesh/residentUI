@@ -22,7 +22,7 @@ export class AdminLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    sessionStorage.clear()
   }
 
   loginUser(value: LoginData) {
