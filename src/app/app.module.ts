@@ -35,6 +35,8 @@ import { FinancialStatementComponent } from './components/payment/financial-stat
 import { DateAsAgoPipe } from './Utils/pipe/date-as-ago.pipe';
 import { AddPaymentComponent } from './components/payment/add-payment/add-payment.component';
 import { MyTransactionHistoryComponent } from './components/payment/my-transaction-history/my-transaction-history.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { LandingComponent } from './layout/landing/landing.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: "red",
   pbColor: "red",
@@ -74,7 +76,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FinancialStatementComponent,
     DateAsAgoPipe,
     AddPaymentComponent,
-    MyTransactionHistoryComponent
+    MyTransactionHistoryComponent,
+    LandingComponent
     
 
 
@@ -90,6 +93,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxPaginationModule,
     Ng2SearchPipeModule,
+    NgbCarouselModule
 
 
   ],

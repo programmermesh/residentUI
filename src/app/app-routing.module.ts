@@ -17,11 +17,13 @@ import { TransactionHistoryComponent } from './components/payment/transaction-hi
 import { FinancialStatementComponent } from './components/payment/financial-statement/financial-statement.component';
 import { AddPaymentComponent } from './components/payment/add-payment/add-payment.component';
 import { MyTransactionHistoryComponent } from './components/payment/my-transaction-history/my-transaction-history.component';
+import { LandingComponent } from './layout/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'admin/login', component: AdminLoginComponent },
+  { path: 'welcome', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   {
     path: 'home',
