@@ -37,6 +37,7 @@ import { AddPaymentComponent } from './components/payment/add-payment/add-paymen
 import { MyTransactionHistoryComponent } from './components/payment/my-transaction-history/my-transaction-history.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingComponent } from './layout/landing/landing.component';
+import { LandlordComponent } from './components/landlord/landlord.component';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: "red",
   pbColor: "red",
@@ -77,7 +78,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     DateAsAgoPipe,
     AddPaymentComponent,
     MyTransactionHistoryComponent,
-    LandingComponent
+    LandingComponent,
+ LandlordComponent
     
 
 

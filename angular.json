@@ -27,7 +27,13 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": ["./node_modules/jquery/dist/jquery.min.js"]
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./assets/js/tiny-slider.js",
+              "./assets/js/easy_background.js",
+              "./assets/js/feather.min.js",
+              "./assets/js/plugins.init.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,7 +95,15 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [ "./node_modules/jquery/dist/jquery.min.js",
+            "./assets/js/bootstrap.bundle.min.js",
+            "./assets/js/tiny-slider.js",
+            "./assets/js/easy_background.js",
+           
+            "./assets/js/feather.min.js",
+            "./assets/js/plugins.init.js",
+            "./assets/js/app.js"
+            ]
           }
         }
       }

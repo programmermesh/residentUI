@@ -18,6 +18,7 @@ import { FinancialStatementComponent } from './components/payment/financial-stat
 import { AddPaymentComponent } from './components/payment/add-payment/add-payment.component';
 import { MyTransactionHistoryComponent } from './components/payment/my-transaction-history/my-transaction-history.component';
 import { LandingComponent } from './layout/landing/landing.component';
+import { LandlordComponent } from './components/landlord/landlord.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'users', component: ManageUsersComponent },
       { path: 'residents', component: ManageResidentsComponent },
+      { path: "landlord", component: LandlordComponent },
       { path: 'visitor', component: VisitorComponent },
       { path: "levy", component: LevyComponent },
       { path: "notice", component: NoticeComponent },
@@ -41,7 +43,7 @@ const routes: Routes = [
       { path: "transaction/history", component: TransactionHistoryComponent },
       { path: "transaction/my/history", component: MyTransactionHistoryComponent },
       { path: "financial/statement", component: FinancialStatementComponent },
-   
+
     ],
   },
 ];

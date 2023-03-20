@@ -53,7 +53,8 @@
               <a class="table-action">
                 <i class="fas fa-user-edit"></i>
               </a>
-              <a (click)="deleteUser(u.id)" class="table-action table-action-delete">
+              <a (click)="confirmDelete(u)" data-toggle="modal" data-target="#deleteModal"
+                class="table-action table-action-delete">
                 <i class="fas fa-trash"></i>
               </a>
             </td>
@@ -142,5 +143,30 @@
         </button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 style="text-align: center I !important;"> Confirm you want to delete the user with name
+          <strong>{{dataToDelete?.other_names}} {{dataToDelete?.lastname}}</strong>
+        </h3>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="closeDelete"  class="btn btn-secondary"  data-dismiss="modal">cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="deleteUser(dataToDelete.id)">Delete  <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+      </div>
+
+    </div>
+
   </div>
 </div>

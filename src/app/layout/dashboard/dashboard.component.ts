@@ -46,6 +46,10 @@ export class DashboardComponent implements OnInit {
     this.residentService.getResidents().subscribe((res: any) => {
       this.residents = res.resident;
       this.loadingRecord = false;
+    },error=>{
+      this.residents =[]
+      console.log(error);
+      
     });
   }
 

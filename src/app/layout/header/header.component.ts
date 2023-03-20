@@ -40,10 +40,14 @@ export class HeaderComponent implements OnInit {
   getResidents() {
     this.loadingResident = true;
     this.residentService.getResidents().subscribe((res: any) => {
-      this.residents = res.resident;
+      this.residents = res?.resident;
       this.loadingResident = false;
-    }, error => {
-    });
+    },error=>{
+      this.residents =[]
+      console.log(error);
+      this.loadingResident = false;
+    }
+    );
 
   }
 

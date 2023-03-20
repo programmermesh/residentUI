@@ -1,0 +1,589 @@
+
+<div class="row">
+    <div class="col-md-5">
+        <!-- Members list group card -->
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row">
+                  <div class="col-6">
+                    <h3 class="mb-0">Manage LandLords</h3>
+                  </div>
+                  <div class="col-6 text-right">
+                    <div class="row">
+                       <div class="col float-right">
+                        <a style="color: #a90b5a !important;" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal" data-target="#exampleModal">
+                            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+                            <span class="btn-inner--text">New LandLord</span>
+                          </a>
+                       </div>
+                        
+                             
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <form class="float-right ">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="filterLandlord"
+                                name="filterLandlord" placeholder="Search LandLord" autocomplete>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- Card body -->
+            <div class="card-body">
+                <!-- List group -->
+                <ng-container *ngIf="landlords?.length>0; else noRecordTemplate">
+                <ul class="list-group list-group-flush list my--3">
+                    <li class="list-group-item px-0"
+                        *ngFor="let list of landlords.reverse() |filter:filterLandlord | paginate: {id: 'landlord', itemsPerPage: 8, currentPage: p };let i=index">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                   <span class="badge badge-pill badge-danger">{{i+1}}</span>
+                            </div>
+                            <div class="col ml--2">
+                                <h4 class="mb-0">
+                                    <a>{{list.lastname}} {{list.other_names}}</a>
+                                </h4>
+                                <!-- <span class="text-success">●</span> -->
+                                <small class="text-muted"><i>{{list.phone1}}</i></small><br>
+                                <small class="text-muted">{{list.address}}</small>
+
+                            </div>
+                            <div class="col-auto">
+                                <a class="table-action" (click)="getSelectedLandLord(list)"  data-toggle="modal" data-target="#editLandlord">
+                                    <i class="fas fa-user-edit"></i>
+                                </a>
+                                <a (click)="getResidentByLandlordsById(list)" class="table-action ">
+                                    <i class="fas fa-users"></i>
+                                </a>
+                                <a (click)="confirmDelete(list)" data-toggle="modal" data-target="#deleteLandlordModal"
+                                    class="table-action table-action-delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                             
+                            </div>
+                        </div>
+                    </li>
+                    <div class="container">
+                        <div class="float-right"> <pagination-controls id="landlord" class="pagination"
+                                (pageChange)="p = $event"></pagination-controls></div>
+                    </div>
+                </ul>
+                </ng-container>
+                <ng-template #noRecordTemplate>
+                    <ul class="list-group list-group-flush list my--3">
+                        <hr>
+                        <div class="container p-5 mb-2">
+                            <div class="text-center">
+                                <div *ngIf="recordLoading" class="spinner-border text-danger spinner-border-sm"
+                                    role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+
+                                <span>
+                                    <h5 *ngIf="recordLoading" class=" text-muted">Fetching Records</h5>
+                                    <h5 *ngIf="!recordLoading" class=" text-muted">No Record Found!</h5>
+                                </span>
+                            </div>
+
+                        </div>
+                    </ul>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xl-7">
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <div class="row">
+                <div class="col-6">
+                  <h3 class="mb-0"><span class="text-primary">{{selectedLandlord?.other_names}}</span> Residents</h3>
+                </div>
+                <div class="col-6 text-right">
+                    <div class="row">
+                       <div class="col float-right" *ngIf="selectedLandlord">
+                        <a style="color: #a90b5a !important;" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="modal" data-target="#registerResidentModal">
+                            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
+                            <span class="btn-inner--text">New Resident</span>
+                          </a>
+                       </div>
+                        
+                             
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <form class="float-right ">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="filterLandlord"
+                                name="filterLandlord" placeholder="Search LandLord" autocomplete>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Employment Status</th>
+                    <th>Profession</th>
+                    <th>Spouse</th>
+                    <th>House</th>
+          
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngIf=" residents?.length>0; else noResidentRecordTemplate">
+                    <tr *ngFor="let list of residents| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                      <td>
+                        <span class="text-muted">{{ 1 + i }}</span>
+                      </td>
+                      <td class="table-user">
+                        <b>{{ list.username }}</b>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{ list.lastname }} {{ list.other_names }}</span>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{ list.employment_status }}</span>
+                      </td>
+                      <td>
+                        <span class="text-muted">{{ list.profession }}</span>
+                      </td>
+                      <td>
+                        <span class="font-weight-bold">{{ list.spouseName }}</span>
+                      </td>
+                      <td>
+                        <span>{{ list.houseType }}</span>
+                      </td>
+                      <td class="table-actions">
+                        <a (click)="confirmDelete(list)" data-toggle="modal" data-target="#deleteResidentModal"
+                        class="table-action table-action-delete">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                       
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-template #noResidentRecordTemplate>
+                    <tr>
+                      <td colspan="8" class="text-center">
+                        <div class="container p-5 mb-2">
+                          <div class="text-center">
+                            <div *ngIf="residentRecordLoading" class="spinner-border text-danger spinner-border-sm" role="status">
+                              <span class="sr-only">Loading...</span>
+                            </div>
+          
+                            <span>
+                              <h5 *ngIf="residentRecordLoading" class=" text-muted">Fetching Records</h5>
+                              <h5 *ngIf="!residentRecordLoading" class=" text-muted">{{noRecordFound}}</h5>
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </tbody>
+          
+          
+              </table>
+              <div class="container" *ngIf=" residents?.length>0">
+                <div class="float-right"> <pagination-controls class="pagination"
+                        (pageChange)="p = $event"></pagination-controls></div>
+            </div>
+            </div>
+          </div>
+          
+    </div>
+</div>
+
+
+
+<!-- Register Landlord Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Register LandLord</h5>
+                <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div class="form-row mb-2">
+                        <div class="col-md-6">
+                            <label class="form-control-label">Last Name</label>
+                            <input class="form-control form-control" type="text" placeholder="Last Name"
+                                formControlName="lastname" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-label">Other Names</label>
+                            <input class="form-control form-control" type="text" placeholder="Other Names"
+                                formControlName="other_names" />
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-6">
+                            <label class="form-control-label">Phone 1</label>
+                            <input class="form-control form-control" type="text" placeholder="Phone 1"
+                                formControlName="phone1" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-label">Phone 2</label>
+                            <input class="form-control form-control" type="text" placeholder="Phone 2"
+                                formControlName="phone2" />
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-6">
+                            <label class="form-control-label">Address</label>
+                            <input class="form-control form-control" type="text" placeholder="Address"
+                                formControlName="address" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-label">Gender</label>
+                            <select class="form-control" formControlName="gender">
+                                <option value="Select Gender">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" (click)="registerLandlord()">
+                    Register
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Landlord Modal -->
+<div class="modal fade" id="editLandlord" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update LandLord</h5>
+                <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row mb-2">
+                        <div class="col-md-6">
+                            <label class="form-control-label">Last Name</label>
+                            <input class="form-control form-control" [disabled]="true" type="text" placeholder="Last Name"  value="{{selectedLandlord?.lastname}}"
+                            name="lastname"   [(ngModel)] ="landlordDataToEdit.lastname"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-label">Other Names</label>
+                            <input class="form-control form-control" [disabled]="true" type="text" placeholder="Other Names"
+                            value="{{selectedLandlord?.other_names}}" name="other_names"
+                            [(ngModel)] ="landlordDataToEdit.other_names" />
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-6">
+                            <label class="form-control-label">Phone 1</label>
+                            <input class="form-control form-control" type="text" placeholder="Phone 1"
+                            value="{{selectedLandlord?.phone1}}" name="phone1"
+                            [(ngModel)] ="landlordDataToEdit.phone1" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-label">Phone 2</label>
+                            <input class="form-control form-control" type="text" placeholder="Phone 2"
+                            value="{{selectedLandlord?.phone2}}" name="phone2"
+                            [(ngModel)] ="landlordDataToEdit.phone2" />
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-2">
+                        <div class="col-md-6">
+                            <label class="form-control-label">Address</label>
+                            <input class="form-control form-control" type="text" placeholder="Address"
+                            value="{{selectedLandlord?.address}}"  name="address"
+                            [(ngModel)] ="landlordDataToEdit.address" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-control-label">Gender</label>
+                            <select class="form-control"value="{{selectedLandlord?.gender}}"
+                            [(ngModel)] ="landlordDataToEdit.gender" name="gender">
+                                <option value="Select Gender">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  id="closeEditLandlordForm" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" (click)="updateLandLord(selectedLandlord?.id)">
+                    Update
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete Landlord -->
+<div class="modal fade" id="deleteLandlordModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 style="text-align: center I !important;"> Confirm you want to delete the landlord with name
+                    <strong>{{dataToDelete?.other_names}} {{dataToDelete?.lastname}}</strong>
+                </h3>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDelete" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                <button type="submit" class="btn btn-primary" (click)="deleteResident(dataToDelete.id)">Delete <span
+                        *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span></button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Add new resident -->
+<div class="modal fade" id="registerResidentModal" tabindex="-1" role="dialog" aria-labelledby="registerResidentModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Resident</h5>
+        <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="residentForm">
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Last Name</label>
+              <input class="form-control form-control" type="text" placeholder="Last Name" formControlName="lastname" required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Other Names</label>
+              <input class="form-control form-control" type="text" placeholder="Other Names"
+                formControlName="other_names" required/>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">Username</label>
+              <input class="form-control form-control" type="text" placeholder="Username" formControlName="username" required/>
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Phone Number</label>
+              <input class="form-control form-control" type="text" placeholder="Phone Number"
+                formControlName="phone_number1"required />
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Alternative Phone Number</label>
+              <input class="form-control form-control" type="text" placeholder="Phone Number 2"
+                formControlName="phone_number2" />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">Employment Status</label>
+              <select class="form-control" formControlName="employment_status" required>
+                <option value="Select Employment Status">Select Employment Status</option>
+                <option value="Employed">Employed</option>
+                <option value="UnEmployed">UnEmployed</option>
+                <option value="Retired">Retired</option>
+
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Profession</label>
+              <input class="form-control form-control" type="text" placeholder="Profession"
+                formControlName="profession" required/>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Date Of Birth</label>
+              <input class="form-control form-control" type="date" placeholder="Date" formControlName="dob" required/>
+            </div>
+          </div>
+          <div class="form-row mb-2">
+
+            <div class="col-md-4">
+              <label class="form-control-label">Marital Status</label>
+              <select class="form-control" formControlName="status"required>
+                <option value="Select Status">Select Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widow">Widow</option>
+                <option value="Widower">Widower</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Spouse Name</label>
+              <input class="form-control " type="text" placeholder="Spouse" formControlName="spouseName" required/>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Spouse Date of Birth</label>
+              <input class="form-control" type="date" placeholder="DOB" formControlName="spouse_dob"required />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Number of Children</label>
+              <input class="form-control form-control" type="number" placeholder="Number of Children"
+                formControlName="numberOfChildren"required />
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Children Names</label>
+              <input class="form-control form-control" type="text" placeholder="e.g Martins, Victor, Benard"
+                formControlName="childrenName" (keydown.enter)="addChild($event)" />
+              <!-- lists -->
+              <p *ngIf="children.length > 0">
+                <i *ngFor="let c of children"> {{ c }}, </i>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">LandLord</label>
+              <input class="form-control form-control" type="text" placeholder="Date of Entry"
+               value="{{selectedLandlord?.lastname}} {{selectedLandlord?.other_names}}" disabled/>
+              
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Date of Entry</label>
+              <input class="form-control form-control" type="date" placeholder="Date of Entry"
+                formControlName="date_of_entry" required />
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Street Name</label>
+              <input class="form-control form-control" type="text" placeholder="Street Name"
+                formControlName="streetName" required/>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">House Type</label>
+              <select class="form-control" formControlName="houseType" required>
+                <option value="Select House Type">Select House Type</option>
+                <option value="Flat">Flat</option>
+                <option value="Single House">Single House</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Mini Flat">Mini Flat</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">House Number</label>
+              <input class="form-control form-control" type="text" placeholder="House Number"
+                formControlName="houseNumber" required/>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Gender</label>
+              <select class="form-control" formControlName="gender" required>
+                <option value="Select Gender">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Password</label>
+              <input class="form-control form-control" type="password" placeholder="********"
+                formControlName="password"required />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  id="closeRegisterResidentForm" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="registerResident()">
+          Register
+          <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Resident -->
+<div class="modal fade" id="deleteResidentModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 style="text-align: center I !important;"> Confirm you want to delete the resident with name
+                    <strong>{{dataToDelete?.other_names}} {{dataToDelete?.lastname}}</strong>
+                </h3>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDelete" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                <button type="submit" class="btn btn-primary" (click)="deleteResident(dataToDelete.id)">Delete <span
+                        *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span></button>
+            </div>
+
+        </div>
+
+    </div>
+</div>

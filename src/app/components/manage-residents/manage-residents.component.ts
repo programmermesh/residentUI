@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { NotificationType } from 'src/app/Utils/notification.enum';
@@ -17,8 +17,10 @@ export class ManageResidentsComponent implements OnInit {
   children: any = [];
   loading: boolean = false;
   closeModal!: HTMLElement
-  recordLoading: boolean=false;
-  p:number=1
+  recordLoading: boolean = false;
+  p: number = 1
+  dataToDelete: any;
+  landlords: any = [];
   constructor(
     private fb: FormBuilder,
     private residentService: ResidentService,
@@ -29,59 +31,72 @@ export class ManageResidentsComponent implements OnInit {
 
   ngOnInit() {
     this.getResidents();
+    this.getLandlords();
     this.residentForm = this.fb.group({
-      lastname: [''],
-      other_names: [''],
-      gender: ['Select Gender'],
-      status: ['Select Status'],
-      phone_number1: [''],
+      lastname: ['',[Validators.required]],
+      other_names: ['',[Validators.required]],
+      gender: ['Select Gender',[Validators.required]],
+      status: ['Select Status',[Validators.required]],
+      phone_number1: ['',[Validators.required]],
       phone_number2: [''],
-      dob: [''],
-      employment_status: ['Select Employment Status'],
-      profession: [''],
-      date_of_entry: [''],
-      nameOfLandLord: [''],
-      streetName: [''],
+      dob: ['',[Validators.required]],
+      employment_status: ['Select Employment Status',[Validators.required]],
+      profession: ['',[Validators.required]],
+      date_of_entry: ['',[Validators.required]],
+      nameOfLandLord: ['',[Validators.required]],
+      streetName: ['',[Validators.required]],
       spouseName: [''],
       spouse_dob: [''],
-      numberOfChildren: [''],
-      childrenName: [''],
-      houseNumber: [''],
-      houseType: ['Select House Type'],
-      username: [''],
-      password: [''],
+      numberOfChildren: ['',[Validators.required]],
+      childrenName: ['',[Validators.required]],
+      houseNumber: ['',[Validators.required]],
+      houseType: ['Select House Type',[Validators.required]],
+      landlordId: ['Select Landlord',[Validators.required]],
+      username: ['',[Validators.required]],
+      password: ['',[Validators.required]],
     });
   }
 
   getResidents() {
-    this.recordLoading=true
+    this.recordLoading = true
     this.residentService.getResidents().subscribe((res: any) => {
       this.residentList = res.resident;
       console.log(this.residentList);
-      this.recordLoading=false
+      this.recordLoading = false
+    }, error => {
+      this.residentList = []
+      this.recordLoading = false
+
     });
   }
 
   registerResident() {
     this.loading = true;
     this.residentForm.value.childrenName = this.children;
+    var selectedLandlord = this.landlords.filter((x: any) => x.id == this.residentForm.value.landlordId)
+    this.residentForm.value.nameOfLandLord = selectedLandlord[0].lastname + " " + selectedLandlord[0].other_names;
+    if(this.residentForm.invalid){
+      this.notifier.notify(NotificationType.ERROR, "Please fill in all required fields")
+      this.loading = false;
+      return;
+    }
     this.residentService
       .registerResident(this.residentForm.value)
       .subscribe((res: any) => {
         this.loading = false;
-       if(res.ResponseCode=="00"){
-        this.notifier.notify(NotificationType.SUCCESS,"Resident Registered Successfully")
-        this.getResidents();
-        this.closeFormModal();
-         this.residentForm.reset();
-         this.children = [];
-       }
-       else{
-        this.notifier.notify(NotificationType.ERROR,res.ResponseDescription)
-       }
-      },error=>{
+        if (res.ResponseCode == "00") {
+          this.notifier.notify(NotificationType.SUCCESS, "Resident Registered Successfully")
+          this.getResidents();
+          this.closeFormModal();
+          this.residentForm.reset();
+          this.children = [];
+        }
+        else {
+          this.notifier.notify(NotificationType.ERROR, res.ResponseDescription)
+        }
+      }, error => {
         this.loading = false;
-        this.notifier.notify(NotificationType.ERROR,error.error.message)
+        this.notifier.notify(NotificationType.ERROR, error.error.message)
       });
   }
   addChild(e: any) {
@@ -95,8 +110,17 @@ export class ManageResidentsComponent implements OnInit {
     }
   }
 
+  getLandlords() {
+    this.recordLoading = true
+    this.residentService.getLandlords().subscribe((res: any) => {
+      this.landlords = res.users;
+      console.log(this.landlords);
+      this.recordLoading = false
+    }, error => {
+      this.recordLoading = false
+    });
+  }
   viewVisitors(id: any) {
-    //  navigate to query params route of ?residentId=1
     this.router.navigate(['/home/visitor'], { queryParams: { residentId: id } });
   }
 
@@ -104,6 +128,25 @@ export class ManageResidentsComponent implements OnInit {
     this.closeModal = document.getElementById('close') as HTMLElement;
     this.closeModal.click()
   }
+  closeDeleteModal() {
+    this.closeModal = document.getElementById('closeDelete') as HTMLElement;
+    this.closeModal.click()
+  }
 
-  deleteUser(id: any) { }
+  confirmDelete(data: any) {
+    this.dataToDelete = data
+
+  }
+  deleteUser(id: any) {
+    this.loading = true;
+    this.residentService.deleteResident(id).subscribe((res: any) => {
+      this.notifier.notify(NotificationType.SUCCESS, "Resident Deleted Successfully")
+      this.getResidents();
+      this.loading = false;
+      this.closeDeleteModal();
+    }, error => {
+      this.loading = false;
+      this.notifier.notify(NotificationType.ERROR, error.error.message)
+    })
+  }
 }

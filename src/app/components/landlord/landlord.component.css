@@ -1,0 +1,14 @@
+a{
+    cursor: pointer;
+}
+.pagination ::ng-deep .ngx-pagination {
+    margin-bottom: 0px !important;
+    padding: 6px 0px 6px 0px;
+
+}
+
+  .pagination ::ng-deep .ngx-pagination .current {
+   background-color: #a90b5a;
+  }
+
+ 

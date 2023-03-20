@@ -16,6 +16,7 @@ export class ManageUsersComponent implements OnInit {
   loading: boolean = false
   recordLoading: boolean = false
   closeModal!: HTMLElement
+  dataToDelete: any;
   constructor(private userService: AuthService, private fb: FormBuilder, private loaderService: NgxUiLoaderService, private notifier: NotificationService) { }
 
   ngOnInit() {
@@ -69,11 +70,23 @@ export class ManageUsersComponent implements OnInit {
     this.closeModal = document.getElementById('close') as HTMLElement;
     this.closeModal.click()
   }
+  closeDeleteModal() {
+    this.closeModal = document.getElementById('closeDelete') as HTMLElement;
+    this.closeModal.click()
+  }
+
+  confirmDelete(data: any) {
+    this.dataToDelete = data
+ 
+  }
 
   deleteUser(id: any) {
+    this.loading = true;
     this.userService.deleteUser(id).subscribe((data: any) => {
       console.log(data);
       this.getAllUsers()
+      this.closeDeleteModal()
+      this.loading = false;
     })
   }
 

@@ -66,6 +66,7 @@ export class VisitorComponent implements OnInit {
 
   addVisitor() {
     this.loading = true;
+    this.visitorForm.value.checkinDate = new Date();
     this.residentService
       .addVisitor(this.visitorForm.value)
       .subscribe((res: any) => {
