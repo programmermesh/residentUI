@@ -29,6 +29,10 @@ export class AuthService {
     return this.http.post(`${this.adminURL}/register`,user);
   }
 
+  resetPassword(user:any,id:string){
+    return this.http.put(`${this.adminURL}/${id}`,user);
+  }
+
   loginAsAdmin(user:any){
     return this.http.post(`${this.adminURL}/login`,user);
 

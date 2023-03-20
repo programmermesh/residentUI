@@ -50,8 +50,9 @@
               <span class="font-weight-bold">{{u.type}}</span>
             </td>
             <td class="table-actions">
-              <a class="table-action">
-                <i class="fas fa-user-edit"></i>
+              <a class="table-action" (click)="getUserToEdit(u)" data-toggle="modal" data-target="#editUser"
+                class="table-action table-action-delete">
+                <i class="fas fa-lock"></i>
               </a>
               <a (click)="confirmDelete(u)" data-toggle="modal" data-target="#deleteModal"
                 class="table-action table-action-delete">
@@ -84,7 +85,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Create User Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
@@ -145,7 +146,7 @@
     </div>
   </div>
 </div>
-
+<!-- Delete User Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
@@ -162,11 +163,47 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" id="closeDelete"  class="btn btn-secondary"  data-dismiss="modal">cancel</button>
-        <button type="submit" class="btn btn-primary" (click)="deleteUser(dataToDelete.id)">Delete  <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+        <button type="button" id="closeDelete" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="deleteUser(dataToDelete.id)">Delete <span *ngIf="loading"
+            class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
       </div>
 
     </div>
 
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reset User Password</h5>
+        <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group mb-2">
+            <label class="form-control-label">Last Name</label>
+            <input class="form-control form-control" name="lastname" type="text" value="{{selecteduser?.username}}"
+              [disabled]="true">
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-control-label">Password</label>
+            <input class="form-control form-control" placeholder="Enter new Password" type="password" name="updatedPassword" [(ngModel)]="updatedPassword">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="editUser" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="editUser(selecteduser.id)">Change Password
+          <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+        </button>
+      </div>
+    </div>
   </div>
 </div>

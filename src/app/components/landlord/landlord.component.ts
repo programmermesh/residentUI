@@ -118,6 +118,7 @@ export class LandlordComponent implements OnInit {
   }
 
   updateLandLord(id:any) {
+    
 
     this.loading = true;
     this.residentService.updateLandlord(id,this.landlordDataToEdit).subscribe((res: any) => {

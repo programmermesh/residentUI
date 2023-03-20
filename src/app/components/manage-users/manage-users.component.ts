@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { IUser } from 'src/app/Utils/Models/User';
 import { NotificationType } from 'src/app/Utils/notification.enum';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -17,6 +18,16 @@ export class ManageUsersComponent implements OnInit {
   recordLoading: boolean = false
   closeModal!: HTMLElement
   dataToDelete: any;
+  selecteduser: any;
+  updatedPassword: any;
+  // userDataToEdit: IUser = {
+  //   lastname: '',
+  //   other_names: '',
+  //   gender: '',
+  //   username: '',
+  //   type: '',
+
+  // }
   constructor(private userService: AuthService, private fb: FormBuilder, private loaderService: NgxUiLoaderService, private notifier: NotificationService) { }
 
   ngOnInit() {
@@ -74,10 +85,14 @@ export class ManageUsersComponent implements OnInit {
     this.closeModal = document.getElementById('closeDelete') as HTMLElement;
     this.closeModal.click()
   }
+  closeEditModal() {
+    this.closeModal = document.getElementById('editUser') as HTMLElement;
+    this.closeModal.click()
+  }
 
   confirmDelete(data: any) {
     this.dataToDelete = data
- 
+
   }
 
   deleteUser(id: any) {
@@ -90,7 +105,33 @@ export class ManageUsersComponent implements OnInit {
     })
   }
 
+  getUserToEdit(data: any) {
+    this.selecteduser = data
 
+  }
+
+
+  editUser(id: any) {
+    this.loading = true;
+    if(this.updatedPassword == "" || this.updatedPassword == undefined){
+      this.loading = false;
+    return  this.notifier.notify(NotificationType.ERROR, "Password cannot be empty")
+    }
+    var data = {
+      password: this.updatedPassword
+    };
+    this.userService.resetPassword(data, id).subscribe((data: any) => {
+      this.loading = false;
+      this.closeEditModal()
+      this.updatedPassword=""
+      this.getAllUsers()
+      this.notifier.notify(NotificationType.SUCCESS, "User Updated Successfully")
+    },error=>{
+      this.loading = false;
+      this.notifier.notify(NotificationType.ERROR, error.error.message)
+    })
+
+  }
 
 
 
