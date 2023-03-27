@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Resident } from 'src/app/Utils/Models/resident';
 import { NotificationType } from 'src/app/Utils/notification.enum';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ResidentService } from 'src/app/services/resident.service';
@@ -21,6 +22,32 @@ export class ManageResidentsComponent implements OnInit {
   p: number = 1
   dataToDelete: any;
   landlords: any = [];
+  residentDataToEdit: Resident = {
+    lastname: '',
+    other_names: '',
+    childrenName: '',
+    date_of_entry: '',
+    dob: '',
+    employment_status: '',
+    gender: '',
+    houseNumber: '',
+    houseType: '',
+    landlordId: '',
+    nameOfLandLord: '',
+    numberOfChildren: '',
+    phone_number1: '',
+    phone_number2: '',
+    profession: '',
+    spouseName: '',
+    spouse_dob: '',
+    status: '',
+    streetName: '',
+    username: '',
+    password: '',
+    type: ''
+  }
+  selectedResident: any;
+  selectedResidentChildren:any=[]
   constructor(
     private fb: FormBuilder,
     private residentService: ResidentService,
@@ -33,27 +60,27 @@ export class ManageResidentsComponent implements OnInit {
     this.getResidents();
     this.getLandlords();
     this.residentForm = this.fb.group({
-      lastname: ['',[Validators.required]],
-      other_names: ['',[Validators.required]],
-      gender: ['Select Gender',[Validators.required]],
-      status: ['Select Status',[Validators.required]],
-      phone_number1: ['',[Validators.required]],
+      lastname: ['', [Validators.required]],
+      other_names: ['', [Validators.required]],
+      gender: ['Select Gender', [Validators.required]],
+      status: ['Select Status', [Validators.required]],
+      phone_number1: ['', [Validators.required]],
       phone_number2: [''],
-      dob: ['',[Validators.required]],
-      employment_status: ['Select Employment Status',[Validators.required]],
-      profession: ['',[Validators.required]],
-      date_of_entry: ['',[Validators.required]],
-      nameOfLandLord: ['',[Validators.required]],
-      streetName: ['',[Validators.required]],
+      dob: ['', [Validators.required]],
+      employment_status: ['Select Employment Status', [Validators.required]],
+      profession: ['', [Validators.required]],
+      date_of_entry: ['', [Validators.required]],
+      nameOfLandLord: ['', [Validators.required]],
+      streetName: ['', [Validators.required]],
       spouseName: [''],
       spouse_dob: [''],
-      numberOfChildren: ['',[Validators.required]],
-      childrenName: ['',[Validators.required]],
-      houseNumber: ['',[Validators.required]],
-      houseType: ['Select House Type',[Validators.required]],
-      landlordId: ['Select Landlord',[Validators.required]],
-      username: ['',[Validators.required]],
-      password: ['',[Validators.required]],
+      numberOfChildren: ['', [Validators.required]],
+      childrenName: ['', [Validators.required]],
+      houseNumber: ['', [Validators.required]],
+      houseType: ['Select House Type', [Validators.required]],
+      landlordId: ['Select Landlord', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -75,7 +102,7 @@ export class ManageResidentsComponent implements OnInit {
     this.residentForm.value.childrenName = this.children;
     var selectedLandlord = this.landlords.filter((x: any) => x.id == this.residentForm.value.landlordId)
     this.residentForm.value.nameOfLandLord = selectedLandlord[0].lastname + " " + selectedLandlord[0].other_names;
-    if(this.residentForm.invalid){
+    if (this.residentForm.invalid) {
       this.notifier.notify(NotificationType.ERROR, "Please fill in all required fields")
       this.loading = false;
       return;
@@ -148,5 +175,37 @@ export class ManageResidentsComponent implements OnInit {
       this.loading = false;
       this.notifier.notify(NotificationType.ERROR, error.error.message)
     })
+  }
+
+
+  getResidentToEdit(data:any){
+    this.selectedResident = data
+    this.residentDataToEdit = data
+    
+    
+  }
+  updateResident(id:any){
+    this.loading = true;
+    this.residentService.updateResident(id,this.residentDataToEdit).subscribe((res: any) => {
+      this.loading = false;
+      if (res.ResponseCode == "00") {
+        this.notifier.notify(NotificationType.SUCCESS, "Resident Updated Successfully")
+        this.getResidents();
+        this.closeEditResidentFormModal();
+  
+      }
+      else {
+        this.notifier.notify(NotificationType.ERROR, res.ResponseDescription)
+      }
+    }, error => {
+      this.loading = false;
+      this.notifier.notify(NotificationType.ERROR, error.error.message)
+    });
+  
+
+  }
+  closeEditResidentFormModal() {
+    this.closeModal = document.getElementById('closeEditResidentForm') as HTMLElement;
+    this.closeModal.click()	
   }
 }

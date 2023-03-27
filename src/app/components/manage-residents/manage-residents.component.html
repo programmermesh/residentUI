@@ -63,7 +63,8 @@
               <span>{{ list.houseType }}</span>
             </td>
             <td class="table-actions">
-              <a class="table-action">
+              <a class="table-action" (click)="getResidentToEdit(list)" data-toggle="modal" data-target="#editModal"
+                class="table-action table-action-delete">
                 <i class="fas fa-user-edit"></i>
               </a>
               <a (click)="confirmDelete(list)" data-toggle="modal" data-target="#deleteModal"
@@ -109,7 +110,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Create resident Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -125,24 +126,26 @@
           <div class="form-row mb-2">
             <div class="col-md-6">
               <label class="form-control-label">Last Name</label>
-              <input class="form-control form-control" type="text" placeholder="Last Name" formControlName="lastname" required />
+              <input class="form-control form-control" type="text" placeholder="Last Name" formControlName="lastname"
+                required />
             </div>
             <div class="col-md-6">
               <label class="form-control-label">Other Names</label>
               <input class="form-control form-control" type="text" placeholder="Other Names"
-                formControlName="other_names" required/>
+                formControlName="other_names" required />
             </div>
           </div>
 
           <div class="form-row mb-2">
             <div class="col-md-4">
               <label class="form-control-label">Username</label>
-              <input class="form-control form-control" type="text" placeholder="Username" formControlName="username" required/>
+              <input class="form-control form-control" type="text" placeholder="Username" formControlName="username"
+                required />
             </div>
             <div class="col-md-4">
               <label class="form-control-label">Phone Number</label>
               <input class="form-control form-control" type="text" placeholder="Phone Number"
-                formControlName="phone_number1"required />
+                formControlName="phone_number1" required />
             </div>
             <div class="col-md-4">
               <label class="form-control-label">Alternative Phone Number</label>
@@ -164,20 +167,20 @@
             </div>
             <div class="col-md-4">
               <label class="form-control-label">Profession</label>
-              <input class="form-control form-control" type="text" placeholder="Profession"
-                formControlName="profession" required/>
+              <input class="form-control form-control" type="text" placeholder="Profession" formControlName="profession"
+                required />
             </div>
 
             <div class="col-md-4">
               <label class="form-control-label">Date Of Birth</label>
-              <input class="form-control form-control" type="date" placeholder="Date" formControlName="dob" required/>
+              <input class="form-control form-control" type="date" placeholder="Date" formControlName="dob" required />
             </div>
           </div>
           <div class="form-row mb-2">
 
             <div class="col-md-4">
               <label class="form-control-label">Marital Status</label>
-              <select class="form-control" formControlName="status"required>
+              <select class="form-control" formControlName="status" required>
                 <option value="Select Status">Select Status</option>
                 <option value="Single">Single</option>
                 <option value="Married">Married</option>
@@ -188,12 +191,12 @@
 
             <div class="col-md-4">
               <label class="form-control-label">Spouse Name</label>
-              <input class="form-control " type="text" placeholder="Spouse" formControlName="spouseName" required/>
+              <input class="form-control " type="text" placeholder="Spouse" formControlName="spouseName" required />
             </div>
 
             <div class="col-md-4">
               <label class="form-control-label">Spouse Date of Birth</label>
-              <input class="form-control" type="date" placeholder="DOB" formControlName="spouse_dob"required />
+              <input class="form-control" type="date" placeholder="DOB" formControlName="spouse_dob" required />
             </div>
           </div>
 
@@ -201,7 +204,7 @@
             <div class="col-md-6">
               <label class="form-control-label">Number of Children</label>
               <input class="form-control form-control" type="number" placeholder="Number of Children"
-                formControlName="numberOfChildren"required />
+                formControlName="numberOfChildren" required />
             </div>
             <div class="col-md-6">
               <label class="form-control-label">Children Names</label>
@@ -217,10 +220,10 @@
           <div class="form-row mb-2">
             <div class="col-md-4">
               <label class="form-control-label">LandLord</label>
-           
+
               <select class="form-control" formControlName="landlordId" required>
                 <option value="Select Landlord">Select LandLord</option>
-                <option *ngFor="let l of landlords" [value]="l.id" >{{l.lastname}} {{l.other_names}}</option>
+                <option *ngFor="let l of landlords" [value]="l.id">{{l.lastname}} {{l.other_names}}</option>
               </select>
             </div>
 
@@ -233,7 +236,7 @@
             <div class="col-md-4">
               <label class="form-control-label">Street Name</label>
               <input class="form-control form-control" type="text" placeholder="Street Name"
-                formControlName="streetName" required/>
+                formControlName="streetName" required />
             </div>
           </div>
 
@@ -251,7 +254,7 @@
             <div class="col-md-6">
               <label class="form-control-label">House Number</label>
               <input class="form-control form-control" type="text" placeholder="House Number"
-                formControlName="houseNumber" required/>
+                formControlName="houseNumber" required />
             </div>
           </div>
 
@@ -267,8 +270,8 @@
             </div>
             <div class="col-md-6">
               <label class="form-control-label">Password</label>
-              <input class="form-control form-control" type="password" placeholder="********"
-                formControlName="password"required />
+              <input class="form-control form-control" type="password" placeholder="********" formControlName="password"
+                required />
             </div>
           </div>
         </form>
@@ -309,5 +312,198 @@
 
     </div>
 
+  </div>
+</div>
+
+<!-- Create resident Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Resident</h5>
+        <button type="button" id="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Last Name</label>
+              <input class="form-control form-control" type="text" placeholder="Last Name"
+                [(ngModel)]="residentDataToEdit.lastname" value="{{selectedResident?.lastname}}" name="lastname"
+                disabled />
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Other Names</label>
+              <input class="form-control form-control" type="text" placeholder="Other Names"
+                [(ngModel)]="residentDataToEdit.other_names" value="{{selectedResident?.other_names}}" name="other_names"
+                 />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">Username</label>
+              <input class="form-control form-control" type="text" placeholder="Username"
+                [(ngModel)]="residentDataToEdit.username" value="{{selectedResident?.username}}" name="username"
+                disabled />
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Phone Number</label>
+              <input class="form-control form-control" type="text" placeholder="Phone Number"
+                [(ngModel)]="residentDataToEdit.phone_number1" value="{{selectedResident?.phone_number1}}"
+                name="phone_number1"  />
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Alternative Phone Number</label>
+              <input class="form-control form-control" type="text" placeholder="Phone Number 2"
+                [(ngModel)]="residentDataToEdit.phone_number2" value="{{selectedResident?.phone_number2}}"
+                name="phone_number2" />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">Employment Status</label>
+              <select class="form-control" name="employment_status" [(ngModel)]="residentDataToEdit.employment_status"
+                value="{{selectedResident?.employment_status}}" >
+                <option value="Select Employment Status">Select Employment Status</option>
+                <option value="Employed">Employed</option>
+                <option value="UnEmployed">UnEmployed</option>
+                <option value="Retired">Retired</option>
+
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-control-label">Profession</label>
+              <input class="form-control form-control" type="text" placeholder="Profession"
+                [(ngModel)]="residentDataToEdit.profession" value="{{selectedResident?.profession}}" name="profession"
+                 />
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Date Of Birth</label>
+              <input class="form-control form-control" type="date" placeholder="Date"
+                [(ngModel)]="residentDataToEdit.dob" value="{{selectedResident?.dob}}" name="dob"
+                 />
+            </div>
+          </div>
+          <div class="form-row mb-2">
+
+            <div class="col-md-4">
+              <label class="form-control-label">Marital Status</label>
+              <select class="form-control" name="status" [(ngModel)]="residentDataToEdit.status"
+                value="{{selectedResident?.status}}" >
+                <option value="Select Status">Select Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widow">Widow</option>
+                <option value="Widower">Widower</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Spouse Name</label>
+              <input class="form-control " type="text" placeholder="Spouse" [(ngModel)]="residentDataToEdit.spouseName"
+                value="{{selectedResident?.spouseName}}" name="spouseName"  />
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Spouse Date of Birth</label>
+              <input class="form-control" type="date" placeholder="DOB" [(ngModel)]="residentDataToEdit.spouse_dob"
+              value="{{selectedResident?.spouse_dob}}" name="spouse_dob"  />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Number of Children</label>
+              <input class="form-control form-control" type="number" placeholder="Number of Children"
+                [(ngModel)]="residentDataToEdit.numberOfChildren" value="{{selectedResident?.numberOfChildren}}"
+                name="numberOfChildren"  />
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">Children Names</label>
+              <input class="form-control form-control" type="text" placeholder="e.g Martins, Victor, Benard"
+              [(ngModel)]="residentDataToEdit.childrenName" name="childrenName" (keydown.enter)="addChild($event)" />
+              <!-- lists -->
+              <!-- <p >
+                <i *ngFor="let c of selectedResident?.childrenName"> {{ c }}, </i>
+              </p> -->
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-4">
+              <label class="form-control-label">LandLord</label>
+
+              <select class="form-control" name="landlordId" [(ngModel)]="residentDataToEdit.landlordId"
+                 required>
+                <option value="Select Landlord">Select LandLord</option>
+                <option *ngFor="let l of landlords" [value]="l.id">{{l.lastname}} {{l.other_names}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Date of Entry</label>
+              <input class="form-control form-control" type="date" placeholder="Date of Entry"
+                [(ngModel)]="residentDataToEdit.date_of_entry" value="{{selectedResident?.date_of_entry}}"
+                name="date_of_entry" disabled />
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-control-label">Street Name</label>
+              <input class="form-control form-control" type="text" placeholder="Street Name"
+                [(ngModel)]="residentDataToEdit.streetName" value="{{selectedResident?.streetName}}" name="streetName"
+                 />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">House Type</label>
+              <select class="form-control" name="houseType" [(ngModel)]="residentDataToEdit.houseType"
+                value="{{selectedResident?.houseType}}" >
+                <option value="Select House Type">Select House Type</option>
+                <option value="Flat">Flat</option>
+                <option value="Single House">Single House</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Mini Flat">Mini Flat</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-control-label">House Number</label>
+              <input class="form-control form-control" type="text" placeholder="House Number"
+                [(ngModel)]="residentDataToEdit.houseNumber" value="{{selectedResident?.houseNumber}}" name="houseNumber"
+                required />
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col-md-6">
+              <label class="form-control-label">Gender</label>
+              <select class="form-control" name="gender" [(ngModel)]="residentDataToEdit.gender"
+                value="{{selectedResident?.gender}}" required>
+                <option value="Select Gender">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  id="closeEditResidentForm" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateResident(selectedResident.id)">
+          Update Resident
+          <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

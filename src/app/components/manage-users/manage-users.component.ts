@@ -20,14 +20,7 @@ export class ManageUsersComponent implements OnInit {
   dataToDelete: any;
   selecteduser: any;
   updatedPassword: any;
-  // userDataToEdit: IUser = {
-  //   lastname: '',
-  //   other_names: '',
-  //   gender: '',
-  //   username: '',
-  //   type: '',
 
-  // }
   constructor(private userService: AuthService, private fb: FormBuilder, private loaderService: NgxUiLoaderService, private notifier: NotificationService) { }
 
   ngOnInit() {

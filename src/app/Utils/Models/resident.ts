@@ -12,9 +12,13 @@ export interface Resident {
     date_of_entry?: string;
     spouseName?: string;
     spouse_dob?: string;
-    numberOfChildren?: 0;
+    numberOfChildren?: string;
     childrenName?: string;
+    nameOfLandLord?: string;
+    landlordId?: string;
     houseNumber?: string;
+    streetName?: string;
+    type?: string;
     houseType?: string;
     username?: string;
     password?: string

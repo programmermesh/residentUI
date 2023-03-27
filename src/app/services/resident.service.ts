@@ -3,6 +3,7 @@ import { Visitor } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Resident } from '../Utils/Models/resident';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +49,10 @@ export class ResidentService {
   registerResident(resident: any) {
     return this.http.post(this.baseURL + '/register', resident);
   }
+  updateResident(id: any, residentDataToEdit: Resident) {
+    return this.http.put(this.baseURL + '/' + id, residentDataToEdit);
+  }
+
 
   getResidentById(residentId: string) {
     return this.http.get(this.baseURL + '/' + residentId);
